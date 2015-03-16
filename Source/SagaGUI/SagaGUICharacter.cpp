@@ -69,6 +69,14 @@ void ASagaGUICharacter::SetupPlayerInputComponent(class UInputComponent* InputCo
 }
 
 
+void ASagaGUICharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	auto floatingBarWidget = UFloatingBarWidget::Create(Cast<APlayerController>(GetController()));
+	if (floatingBarWidget) floatingBarWidget->AddToViewport();
+}
+
 void ASagaGUICharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {
 	// jump, but only on the first touch
