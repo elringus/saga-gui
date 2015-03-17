@@ -73,8 +73,13 @@ void ASagaGUICharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto floatingBarWidget = UFloatingBarWidget::Create(Cast<APlayerController>(GetController()));
-	if (floatingBarWidget) floatingBarWidget->AddToViewport();
+	AActor* followTarget = nullptr;
+	for (TActorIterator<AActor> It(GetWorld()); It; ++It)
+	{
+		AActor* actor = *It;
+		if (actor->GetActorLabel().Equals(TEXT("FuckingActor"))) followTarget = actor;
+	}
+	auto floatingBarWidget = UFloatingBarWidget::Create(Cast<APlayerController>(GetController()), followTarget);
 }
 
 void ASagaGUICharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
