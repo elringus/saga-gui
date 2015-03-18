@@ -15,14 +15,13 @@ public:
 	UFloatingBarWidget(const class FObjectInitializer& objectInitializer);
 	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget);
 
-	virtual void Tick_Implementation(FGeometry MyGeometry, float InDeltaTime) override;
-
-	FORCEINLINE void SetPercent(const float &value) { floatingBar->SetPercent(value); }
+	FORCEINLINE void SetPercent(const float& value) { floatingBar->SetPercent(value); }
 
 	class AActor* FollowTarget;
 	
 protected:
 	virtual void OnWidgetRebuilt() override;
+	virtual void Tick_Implementation(FGeometry MyGeometry, float InDeltaTime) override;
 
 private:
 	static TSubclassOf<class UFloatingBarWidget> widgetInstance;

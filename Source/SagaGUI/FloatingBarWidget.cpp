@@ -15,6 +15,7 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 	auto widget = CreateWidget<UFloatingBarWidget>(masterController, widgetInstance);
 	widget->FollowTarget = followTarget;
 	widget->AddToViewport();
+
 	return widget;
 }
 
