@@ -76,11 +76,12 @@ void ASagaGUICharacter::BeginPlay()
 	for (TActorIterator<AActor> It(GetWorld()); It; ++It)
 	{
 		AActor* actor = *It;
-		if (actor->GetActorLabel().Equals(TEXT("FuckingActor")) ||
+		if (//actor->GetActorLabel().Equals(TEXT("FuckingActor")) ||
 			actor->GetActorLabel().Equals(TEXT("ThirdPersonCharacter"))) 
 		{
-			UFloatingBarWidget::Create(Cast<APlayerController>(GetController()), actor);
+			floatingBar = UFloatingBarWidget::Create(Cast<APlayerController>(GetController()), actor, FVector(0, 0, 100));
 		}
+		else UFloatingBarWidget::Create(Cast<APlayerController>(GetController()), actor, FVector(0, 0, 50));
 	}
 }
 
@@ -117,6 +118,8 @@ void ASagaGUICharacter::MoveForward(float Value)
 {
 	if ((Controller != NULL) && (Value != 0.0f))
 	{
+		floatingBar->SetPercent(1.f);
+
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
@@ -131,6 +134,8 @@ void ASagaGUICharacter::MoveRight(float Value)
 {
 	if ( (Controller != NULL) && (Value != 0.0f) )
 	{
+		floatingBar->SetPercent(.5f);
+
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);

@@ -10,11 +10,12 @@ UFloatingBarWidget::UFloatingBarWidget(const class FObjectInitializer& objectIni
 	if (widgetBP.Succeeded()) widgetInstance = (UClass*)widgetBP.Object->GeneratedClass;
 }
 
-UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget)
+UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset)
 {
 	auto widget = CreateWidget<UFloatingBarWidget>(masterController, widgetInstance);
 	widget->FollowTarget = followTarget;
 	widget->AddToViewport();
+	widget->offset = offset;
 
 	return widget;
 }
@@ -22,7 +23,7 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 void UFloatingBarWidget::Tick_Implementation(FGeometry MyGeometry, float InDeltaTime)
 {
 	FVector2D screenPos; 
-	GetWorld()->GetFirstPlayerController()->ProjectWorldLocationToScreen(FollowTarget->GetActorLocation(), screenPos);
+	GetWorld()->GetFirstPlayerController()->ProjectWorldLocationToScreen(FollowTarget->GetActorLocation() + offset, screenPos);
 	(Cast<UCanvasPanelSlot>(floatingBar->Slot))->SetPosition(screenPos);
 }
 

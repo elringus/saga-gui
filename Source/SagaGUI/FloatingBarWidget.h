@@ -13,7 +13,7 @@ class SAGAGUI_API UFloatingBarWidget : public UUserWidget
 	
 public:
 	UFloatingBarWidget(const class FObjectInitializer& objectInitializer);
-	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget);
+	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset);
 
 	FORCEINLINE void SetPercent(const float& value) { floatingBar->SetPercent(value); }
 
@@ -26,4 +26,5 @@ protected:
 private:
 	static TSubclassOf<class UFloatingBarWidget> widgetInstance;
 	class UProgressBar* floatingBar;
+	FVector offset;
 };
