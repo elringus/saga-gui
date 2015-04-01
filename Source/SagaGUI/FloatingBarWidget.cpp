@@ -13,25 +13,21 @@ UFloatingBarWidget::UFloatingBarWidget(const class FObjectInitializer& objectIni
 UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset)
 {
 	auto widget = CreateWidget<UFloatingBarWidget>(masterController, widgetInstance);
-	widget->FollowTarget = followTarget;
+	widget->followTarget = followTarget;
 	widget->AddToViewport();
 	widget->offset = offset;
+
+	widget->floatingBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("FloatingBar")));
 
 	return widget;
 }
 
-void UFloatingBarWidget::Tick_Implementation(FGeometry MyGeometry, float InDeltaTime)
+void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
 {
 	FVector2D screenPos; 
-	GetWorld()->GetFirstPlayerController()->ProjectWorldLocationToScreen(FollowTarget->GetActorLocation() + offset, screenPos);
+	GetWorld()->GetFirstPlayerController()->ProjectWorldLocationToScreen(followTarget->GetActorLocation() + offset, screenPos);
 	(Cast<UCanvasPanelSlot>(floatingBar->Slot))->SetPosition(screenPos);
+
+	if (onTick.IsBound()) SetFillAmount(onTick.Execute());
 }
-
-void UFloatingBarWidget::OnWidgetRebuilt()
-{
-	Super::OnWidgetRebuilt();
-
-	floatingBar = Cast<UProgressBar>(GetWidgetFromName(TEXT("FloatingBar")));
-}
-
 
