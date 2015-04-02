@@ -14,6 +14,10 @@ class SAGAGUI_API UPlayerHPWidget : public UUserWidget
 public:
 	UPlayerHPWidget(const class FObjectInitializer& objectInitializer);
 
+	/************************************************************************/
+	/* Public API                                                           */
+	/************************************************************************/
+
 	/**
 	*	Creates the widget and adds it to the viewport.
 	*	@param masterController Controller of the player, that will own the widget.

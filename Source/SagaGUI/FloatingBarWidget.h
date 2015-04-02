@@ -14,6 +14,22 @@ class SAGAGUI_API UFloatingBarWidget : public UUserWidget
 public:
 	UFloatingBarWidget(const class FObjectInitializer& objectInitializer);
 
+	/************************************************************************/
+	/* Blueprint parameters                                                 */
+	/************************************************************************/
+
+	/* Hide the widget, when distane between follow target and the master controller is more than this value. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating bar parameters")
+	float VisibleRadius = 1500.f;
+
+	/* Speed of revealing\hiding the widget, controlled by visible radius. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating bar parameters")
+	float VisibilityTransitionSpeed = 5.f;
+
+	/************************************************************************/
+	/* Public API                                                           */
+	/************************************************************************/
+
 	/** 
 	 *	Creates the widget and adds it to the viewport.
 	 *	@param masterController Controller of the player, that will own the widget.
@@ -45,6 +61,8 @@ private:
 
 	UPROPERTY() UProgressBar* floatingBar;
 	UPROPERTY() AActor* followTarget;
+	UPROPERTY() AController* masterController;
+	UPROPERTY() AActor* masterActor;
 	UPROPERTY() FVector offset;
 
 	DECLARE_DELEGATE_RetVal(float, FOnTick)

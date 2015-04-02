@@ -37,12 +37,12 @@ void ASagaGUICharacter::BeginPlay()
 		if (actorIt->GetActorLabel().Equals(TEXT("HappySphere")))
 		{
 			auto floatingBar = UFloatingBarWidget::Create(Cast<APlayerController>(GetController()), *actorIt, FVector(0, 0, 100));
-			floatingBar->BindFillAmount([=]()->float{ return FMath::Abs(FMath::Sin(GetWorld()->TimeSeconds)); });
+			floatingBar->BindFillAmount([=]()->float{ return FMath::Abs(FMath::Sin(GetWorld()->TimeSeconds)) + .1f; });
 		}
 	}
 
 	auto hpBar = UPlayerHPWidget::Create(Cast<APlayerController>(GetController()));
-	hpBar->BindFillAmount([=]()->float{ return FMath::Abs(FMath::Cos(GetWorld()->TimeSeconds)); });
+	hpBar->BindFillAmount([=]()->float{ return FMath::Abs(FMath::Cos(GetWorld()->TimeSeconds)) + .1f; });
 }
 
 #pragma region Control
