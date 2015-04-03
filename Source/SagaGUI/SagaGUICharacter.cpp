@@ -1,10 +1,13 @@
 #include "SagaGUI.h"
 #include "SagaGUICharacter.h"
 
-ASagaGUICharacter::ASagaGUICharacter(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
+ASagaGUICharacter::ASagaGUICharacter()
 {
+	PrimaryActorTick.bCanEverTick = true;
+
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ASagaGUICharacter::OnOverlapBegin);
+	GetCapsuleComponent()->OnComponentEndOverlap.AddDynamic(this, &ASagaGUICharacter::OnOverlapEnd);
 
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
@@ -43,6 +46,20 @@ void ASagaGUICharacter::BeginPlay()
 
 	auto hpBar = UPlayerHPWidget::Create(Cast<APlayerController>(GetController()));
 	hpBar->BindFillAmount([=]()->float{ return FMath::Abs(FMath::Cos(GetWorld()->TimeSeconds)) + .1f; });
+}
+
+void ASagaGUICharacter::OnOverlapBegin(class AActor* otherActor, class UPrimitiveComponent* otherComp, int32 otherBodyIndex, bool bFromSweep, const FHitResult& sweepResult)
+{
+	if (otherActor && (otherActor != this) && otherComp) 
+	{
+		UFloatingTextWidget::Spawn(Cast<APlayerController>(GetController()), FString::Printf(TEXT("Happy collided with %s"), *otherActor->GetName()));
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *otherActor->GetName());
+	}
+}
+
+void ASagaGUICharacter::OnOverlapEnd(class AActor* otherActor, class UPrimitiveComponent* otherComp, int32 otherBodyIndex)
+{
+
 }
 
 #pragma region Control

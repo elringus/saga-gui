@@ -3,13 +3,13 @@
 #include "GameFramework/Character.h"
 #include "SagaGUICharacter.generated.h"
 
-UCLASS(config=Game)
+UCLASS()
 class ASagaGUICharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	ASagaGUICharacter(const FObjectInitializer& ObjectInitializer);
+	ASagaGUICharacter();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
@@ -32,5 +32,10 @@ protected:
 	void LookUpAtRate(float Rate);
 	void TouchStarted(ETouchIndex::Type FingerIndex, FVector Location);
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
+
+	UFUNCTION()
+	void OnOverlapBegin(class AActor* otherActor, class UPrimitiveComponent* otherComp, int32 otherBodyIndex, bool bFromSweep, const FHitResult& sweepResult);
+	UFUNCTION()
+	void OnOverlapEnd(class AActor* otherActor, class UPrimitiveComponent* otherComp, int32 otherBodyIndex);
 };
 
