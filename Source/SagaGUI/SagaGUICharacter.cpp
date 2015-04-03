@@ -3,11 +3,7 @@
 
 ASagaGUICharacter::ASagaGUICharacter()
 {
-	PrimaryActorTick.bCanEverTick = true;
-
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &ASagaGUICharacter::OnOverlapBegin);
-	GetCapsuleComponent()->OnComponentEndOverlap.AddDynamic(this, &ASagaGUICharacter::OnOverlapEnd);
 
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
@@ -48,18 +44,22 @@ void ASagaGUICharacter::BeginPlay()
 	hpBar->BindFillAmount([=]()->float{ return FMath::Abs(FMath::Cos(GetWorld()->TimeSeconds)) + .1f; });
 }
 
-void ASagaGUICharacter::OnOverlapBegin(class AActor* otherActor, class UPrimitiveComponent* otherComp, int32 otherBodyIndex, bool bFromSweep, const FHitResult& sweepResult)
+void ASagaGUICharacter::ReceiveActorBeginOverlap(AActor* otherActor)
 {
-	if (otherActor && (otherActor != this) && otherComp) 
-	{
-		UFloatingTextWidget::Spawn(Cast<APlayerController>(GetController()), FString::Printf(TEXT("Happy collided with %s"), *otherActor->GetName()));
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, *otherActor->GetName());
-	}
+	UFloatingTextWidget::Spawn(Cast<APlayerController>(GetController()), otherActor, FString::Printf(TEXT("Collided with %s"), *otherActor->GetName()));
 }
 
-void ASagaGUICharacter::OnOverlapEnd(class AActor* otherActor, class UPrimitiveComponent* otherComp, int32 otherBodyIndex)
+void ASagaGUICharacter::ReceiveHit(class UPrimitiveComponent* myComp, AActor* otherActor, class UPrimitiveComponent* otherComp, bool selfMoved, 
+	FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit)
 {
+	//UFloatingTextWidget::Spawn(Cast<APlayerController>(GetController()), FString::Printf(TEXT("Kicked %s"), *otherActor->GetName()), FLinearColor::Red);
+}
 
+void ASagaGUICharacter::Jump()
+{
+	Super::Jump();
+
+	UFloatingTextWidget::Spawn(Cast<APlayerController>(GetController()), TEXT("Jumped"));
 }
 
 #pragma region Control

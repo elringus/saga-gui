@@ -26,6 +26,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating text parameters")
 	float FloatingSpeed = 10.f;
 
+	/* How fast the message will fade out. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating text parameters")
+	float FadeSpeed = 1.f;
+
 	/************************************************************************/
 	/* Public API                                                           */
 	/************************************************************************/

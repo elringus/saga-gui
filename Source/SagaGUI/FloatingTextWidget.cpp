@@ -48,7 +48,18 @@ void UFloatingTextWidget::Spawn(APlayerController* masterController, AActor* tar
 
 void UFloatingTextWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
 {
-	(Cast<UCanvasPanelSlot>(messageLabel->Slot))->SetPosition((Cast<UCanvasPanelSlot>(messageLabel->Slot))->GetPosition() + FVector2D(0, FloatingSpeed * inDeltaTime));
+	auto curPos = (Cast<UCanvasPanelSlot>(messageLabel->Slot))->GetPosition();
+
+	(Cast<UCanvasPanelSlot>(messageLabel->Slot))->SetPosition(curPos + FVector2D(0, -FloatingSpeed * inDeltaTime));
+
+	auto opacity = FMath::InterpExpoOut(messageLabel->ColorAndOpacity.GetSpecifiedColor().A,
+		FMath::Clamp(curPos.Y / (FVector2D(GEngine->GameViewport->Viewport->GetSizeXY()).Y / 2), 0.f, 1.f),
+		inDeltaTime * FadeSpeed);
+	auto color = messageLabel->ColorAndOpacity.GetSpecifiedColor();
+	color.A = opacity;
+	SetColor(color);
+
+	if (curPos.Y < 0) RemoveFromViewport();
 }
 
 void UFloatingTextWidget::SetColor(const FLinearColor& color)
