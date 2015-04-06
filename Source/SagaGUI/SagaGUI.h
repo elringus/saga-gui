@@ -9,5 +9,6 @@
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 
 #include "FloatingBarWidget.h"
+#include "AllyDotWidget.h"
 #include "FloatingTextWidget.h"
 #include "PlayerHPWidget.h"

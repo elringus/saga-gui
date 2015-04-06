@@ -20,6 +20,7 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 	widget->offset = offset;
 
 	widget->floatingBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("FloatingBar")));
+	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));
 
 	return widget;
 }
@@ -27,8 +28,20 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
 {
 	FVector2D screenPos; 
-	GetWorld()->GetFirstPlayerController()->ProjectWorldLocationToScreen(followTarget->GetActorLocation() + offset, screenPos);
-	(Cast<UCanvasPanelSlot>(floatingBar->Slot))->SetPosition(screenPos);
+	if (Cast<APlayerController>(masterController)->ProjectWorldLocationToScreen(followTarget->GetActorLocation() + offset, screenPos))
+	{
+		floatingBar->SetVisibility(ESlateVisibility::Visible);
+
+		Scalability::FQualityLevels scalabilityQuality = Scalability::GetQualityLevels();
+		float qualityScale = (scalabilityQuality.ResolutionQuality / 100.0f);
+
+		SetPositionInViewport(screenPos / qualityScale - FVector2D(Cast<UCanvasPanelSlot>(floatingBar->Slot)->GetSize().X / 2, 0));
+	}
+	else
+	{
+		floatingBar->SetVisibility(ESlateVisibility::Hidden);
+		return;
+	}
 
 	if (masterActor) 
 	{
@@ -44,6 +57,13 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDelta
 
 		color = floatingBar->WidgetStyle.BackgroundImage.TintColor.GetSpecifiedColor();
 		floatingBar->WidgetStyle.BackgroundImage.TintColor = FSlateColor(FLinearColor(color.R, color.G, color.B, opacity));
+
+		color = hpLabel->ColorAndOpacity.GetSpecifiedColor();
+		color.A = opacity;
+		hpLabel->SetColorAndOpacity(color);
+		color = hpLabel->ShadowColorAndOpacity;
+		color.A = FMath::Clamp(color.A - .2f, 0.f, 1.f);
+		hpLabel->SetShadowColorAndOpacity(color);
 	}
 	else GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("SagaGUI: can't find master actor for floating bar."));
 

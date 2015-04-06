@@ -37,13 +37,17 @@ public:
 	 *	@param offset Offset to the follow target location in world space.
 	 *	@return Instance of the created widget.
 	 */
-	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset);
+	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector);
 
 	/**
 	 *	Sets the fill amount of the progress bar. 
 	 *	@param value Fill value. Should be in 0.0 to 1.0 range.
 	 */
-	FORCEINLINE void SetFillAmount(const float& value) { floatingBar->SetPercent(value); }
+	FORCEINLINE void SetFillAmount(const float& value) 
+	{ 
+		floatingBar->SetPercent(value); 
+		hpLabel->SetText(FText::FromString(FString::Printf(TEXT("%d%%"), (uint8)(floatingBar->Percent * 100)))); 
+	}
 	
 	/**
 	*	Binds the fill amount of the progress bar.
@@ -60,6 +64,7 @@ private:
 	static TSubclassOf<class UFloatingBarWidget> widgetInstance;
 
 	UPROPERTY() UProgressBar* floatingBar;
+	UPROPERTY() UTextBlock* hpLabel;
 	UPROPERTY() AActor* followTarget;
 	UPROPERTY() AController* masterController;
 	UPROPERTY() AActor* masterActor;

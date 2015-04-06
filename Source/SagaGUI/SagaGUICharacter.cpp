@@ -33,10 +33,16 @@ void ASagaGUICharacter::BeginPlay()
 
 	for (TActorIterator<AActor> actorIt(GetWorld()); actorIt; ++actorIt)
 	{
-		if (actorIt->GetActorLabel().Equals(TEXT("HappySphere")))
+		if (actorIt->GetActorLabel().Contains(TEXT("EnemySphere")))
 		{
-			auto floatingBar = UFloatingBarWidget::Create(Cast<APlayerController>(GetController()), *actorIt, FVector(0, 0, 100));
+			auto floatingBar = UFloatingBarWidget::Create(Cast<APlayerController>(GetController()), *actorIt, FVector(0, 0, 150));
 			floatingBar->BindFillAmount([=]()->float{ return FMath::Abs(FMath::Sin(GetWorld()->TimeSeconds)) + .1f; });
+		}
+		else if (actorIt->GetActorLabel().Contains(TEXT("FriendSphere")))
+		{
+			auto allyDot = UAllyDotWidget::Create(Cast<APlayerController>(GetController()), *actorIt, FVector(0, 0, 150));
+			auto location = actorIt->GetActorLocation();
+			allyDot->BindHPRatio([=]()->float{ return 500.f / FVector::Dist(GetActorLocation(), location); });
 		}
 	}
 
