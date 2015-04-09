@@ -27,8 +27,6 @@ public:
 	virtual void ReceiveHit(class UPrimitiveComponent* myComp, AActor* otherActor, class UPrimitiveComponent* otherComp, 
 		bool selfMoved, FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit) override;
 
-	virtual void Jump() override;
-
 protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 	virtual void BeginPlay() override;

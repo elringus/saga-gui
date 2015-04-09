@@ -25,6 +25,12 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 	return widget;
 }
 
+void UFloatingBarWidget::SetFillAmount(const float& value)
+{
+	floatingBar->SetPercent(value);
+	hpLabel->SetText(FText::FromString(FString::Printf(TEXT("%d%%"), (uint8)(floatingBar->Percent * 100))));
+}
+
 void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
 {
 	FVector2D screenPos; 

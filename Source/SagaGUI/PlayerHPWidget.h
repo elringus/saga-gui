@@ -4,7 +4,8 @@
 #include "PlayerHPWidget.generated.h"
 
 /**
- *	Widget for player HP. Institiates with the static Create() method.
+ *	Widget for player HP. 
+ *  Institiates with the static Create() method.
  */
 UCLASS()
 class SAGAGUI_API UPlayerHPWidget : public UUserWidget
@@ -14,22 +15,20 @@ class SAGAGUI_API UPlayerHPWidget : public UUserWidget
 public:
 	UPlayerHPWidget(const class FObjectInitializer& objectInitializer);
 
-	/************************************************************************/
-	/* Public API                                                           */
-	/************************************************************************/
-
 	/**
 	*	Creates the widget and adds it to the viewport.
 	*	@param masterController Controller of the player, that will own the widget.
 	*	@return Instance of the created widget.
 	*/
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|PlayerHPWidget")
 	static UPlayerHPWidget* Create(APlayerController* masterController);
 
 	/**
 	*	Sets the fill amount of the progress bar.
 	*	@param value Fill value. Should be in 0.0 to 1.0 range.
 	*/
-	FORCEINLINE void SetFillAmount(const float& value) { hpBar->SetPercent(value); }
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|PlayerHPWidget")
+	void SetFillAmount(const float& value);
 
 	/**
 	*	Binds the fill amount of the progress bar.

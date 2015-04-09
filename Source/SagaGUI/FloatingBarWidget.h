@@ -4,7 +4,8 @@
 #include "FloatingBarWidget.generated.h"
 
 /**
- *	Widget for floating bars. Institiates with the static Create() method.
+ *	Widget for floating bars. 
+ *  Institiates with the static Create() method.
  */
 UCLASS()
 class SAGAGUI_API UFloatingBarWidget : public UUserWidget
@@ -14,21 +15,13 @@ class SAGAGUI_API UFloatingBarWidget : public UUserWidget
 public:
 	UFloatingBarWidget(const class FObjectInitializer& objectInitializer);
 
-	/************************************************************************/
-	/* Blueprint parameters                                                 */
-	/************************************************************************/
-
 	/* Hide the widget, when distane between follow target and the master controller is more than this value. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating bar parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|Floating bar parameters")
 	float VisibleRadius = 1500.f;
 
 	/* Speed of revealing\hiding the widget, controlled by visible radius. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating bar parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|Floating bar parameters")
 	float VisibilityTransitionSpeed = 5.f;
-
-	/************************************************************************/
-	/* Public API                                                           */
-	/************************************************************************/
 
 	/** 
 	 *	Creates the widget and adds it to the viewport.
@@ -37,17 +30,15 @@ public:
 	 *	@param offset Offset to the follow target location in world space.
 	 *	@return Instance of the created widget.
 	 */
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingBarWidget")
 	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector);
 
 	/**
 	 *	Sets the fill amount of the progress bar. 
 	 *	@param value Fill value. Should be in 0.0 to 1.0 range.
 	 */
-	FORCEINLINE void SetFillAmount(const float& value) 
-	{ 
-		floatingBar->SetPercent(value); 
-		hpLabel->SetText(FText::FromString(FString::Printf(TEXT("%d%%"), (uint8)(floatingBar->Percent * 100)))); 
-	}
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingBarWidget")
+	void SetFillAmount(const float& value);
 	
 	/**
 	*	Binds the fill amount of the progress bar.
@@ -55,7 +46,7 @@ public:
 	*	Should return float and take no parameters.
 	*/
 	template<typename FunctorType>
-	FORCEINLINE void BindFillAmount(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
+	void BindFillAmount(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
 
 protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;

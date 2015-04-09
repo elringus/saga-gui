@@ -45,27 +45,17 @@ void ASagaGUICharacter::BeginPlay()
 			allyDot->BindHPRatio([=]()->float{ return 500.f / FVector::Dist(GetActorLocation(), location); });
 		}
 	}
-
-	auto hpBar = UPlayerHPWidget::Create(Cast<APlayerController>(GetController()));
-	hpBar->BindFillAmount([=]()->float{ return FMath::Abs(FMath::Cos(GetWorld()->TimeSeconds)) + .1f; });
 }
 
 void ASagaGUICharacter::ReceiveActorBeginOverlap(AActor* otherActor)
 {
-	UFloatingTextWidget::Spawn(Cast<APlayerController>(GetController()), otherActor, FString::Printf(TEXT("Collided with %s"), *otherActor->GetName()));
+	UFloatingTextWidget::SpawnAtActor(Cast<APlayerController>(GetController()), otherActor, FString::Printf(TEXT("Collided with %s"), *otherActor->GetName()));
 }
 
 void ASagaGUICharacter::ReceiveHit(class UPrimitiveComponent* myComp, AActor* otherActor, class UPrimitiveComponent* otherComp, bool selfMoved, 
 	FVector hitLocation, FVector hitNormal, FVector normalImpulse, const FHitResult& hit)
 {
 	//UFloatingTextWidget::Spawn(Cast<APlayerController>(GetController()), FString::Printf(TEXT("Kicked %s"), *otherActor->GetName()), FLinearColor::Red);
-}
-
-void ASagaGUICharacter::Jump()
-{
-	Super::Jump();
-
-	UFloatingTextWidget::Spawn(Cast<APlayerController>(GetController()), TEXT("Jumped"));
 }
 
 #pragma region Control

@@ -17,22 +17,14 @@ class SAGAGUI_API UFloatingTextWidget : public UUserWidget
 	
 public:
 	UFloatingTextWidget(const class FObjectInitializer& objectInitializer);
-	
-	/************************************************************************/
-	/* Blueprint parameters                                                 */
-	/************************************************************************/
 
 	/* Floating speed of the messages. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating text parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|Floating text parameters")
 	float FloatingSpeed = 10.f;
 
 	/* How fast the message will fade out. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floating text parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|Floating text parameters")
 	float FadeSpeed = 1.f;
-
-	/************************************************************************/
-	/* Public API                                                           */
-	/************************************************************************/
 	                                                                              
 	/**
 	*	Spawns a floating text message in the center of the screen.
@@ -40,7 +32,8 @@ public:
 	*	@param message Message to show.
 	*	@param color Text color of the message.
 	*/
-	static void Spawn(APlayerController* masterController, FString message, FLinearColor color = FLinearColor::White);
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingTextWidget")
+	static void Spawn(APlayerController* masterController, FString message, FLinearColor textColor = FLinearColor::White);
 
 	/**
 	*	Spawns a floating text message in the specified screen space position.
@@ -49,7 +42,8 @@ public:
 	*	@param message Message to show.
 	*	@param color Text color of the message.
 	*/
-	static void Spawn(APlayerController* masterController, FVector2D screenPosition, FString message, FLinearColor color = FLinearColor::White);
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingTextWidget")
+	static void SpawnAtPosition(APlayerController* masterController, FVector2D screenPosition, FString message, FLinearColor textColor = FLinearColor::White);
 
 	/**
 	*	Spawns a floating text message relative to the specified target actor.
@@ -58,7 +52,8 @@ public:
 	*	@param message Message to show.
 	*	@param color Text color of the message.
 	*/
-	static void Spawn(APlayerController* masterController, AActor* targetActor, FString message, FLinearColor color = FLinearColor::White);
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingTextWidget")
+	static void SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FLinearColor textColor = FLinearColor::White);
 
 protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;

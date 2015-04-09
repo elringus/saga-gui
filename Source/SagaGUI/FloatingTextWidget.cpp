@@ -10,36 +10,36 @@ UFloatingTextWidget::UFloatingTextWidget(const class FObjectInitializer& objectI
 	if (widgetBP.Succeeded()) widgetInstance = (UClass*)widgetBP.Object->GeneratedClass;
 }
 
-UFloatingTextWidget* UFloatingTextWidget::Create(APlayerController* masterController, FString message, FLinearColor color)
+UFloatingTextWidget* UFloatingTextWidget::Create(APlayerController* masterController, FString message, FLinearColor textColor)
 {
 	auto widget = CreateWidget<UFloatingTextWidget>(masterController, widgetInstance);
 	widget->AddToViewport();
 	widget->messageLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("MessageLabel")));
 	widget->messageLabel->SetText(FText::FromString(message));
-	widget->SetColor(color);
+	widget->SetColor(textColor);
 
 	return widget;
 }
 
-void UFloatingTextWidget::Spawn(APlayerController* masterController, FString message, FLinearColor color /*= FLinearColor::White*/)
+void UFloatingTextWidget::Spawn(APlayerController* masterController, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	auto widget = Create(masterController, message, color);
+	auto widget = Create(masterController, message, textColor);
 
 	const FVector2D viewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
 	const FVector2D viewportCenter = FVector2D(viewportSize.X / 2, viewportSize.Y / 2);
 	(Cast<UCanvasPanelSlot>(widget->messageLabel->Slot))->SetPosition(viewportCenter);
 }
 
-void UFloatingTextWidget::Spawn(APlayerController* masterController, FVector2D screenPosition, FString message, FLinearColor color /*= FLinearColor::White*/)
+void UFloatingTextWidget::SpawnAtPosition(APlayerController* masterController, FVector2D screenPosition, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	auto widget = Create(masterController, message, color);
+	auto widget = Create(masterController, message, textColor);
 
 	(Cast<UCanvasPanelSlot>(widget->messageLabel->Slot))->SetPosition(screenPosition);
 }
 
-void UFloatingTextWidget::Spawn(APlayerController* masterController, AActor* targetActor, FString message, FLinearColor color /*= FLinearColor::White*/)
+void UFloatingTextWidget::SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	auto widget = Create(masterController, message, color);
+	auto widget = Create(masterController, message, textColor);
 
 	FVector2D screenPos;
 	masterController->ProjectWorldLocationToScreen(targetActor->GetActorLocation(), screenPos);

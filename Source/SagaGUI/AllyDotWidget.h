@@ -15,21 +15,13 @@ class SAGAGUI_API UAllyDotWidget : public UUserWidget
 public:
 	UAllyDotWidget(const class FObjectInitializer& objectInitializer);
 
-	/************************************************************************/
-	/* Blueprint parameters                                                 */
-	/************************************************************************/
-
 	/* Hide the widget, when distane between follow target and the master controller is more than this value. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ally dot parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|AllyDotWidget")
 	float VisibleRadius = 3000.f;
 
 	/* Speed of revealing\hiding the widget, controlled by visible radius. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ally dot parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|AllyDotWidget")
 	float VisibilityTransitionSpeed = 5.f;
-
-	/************************************************************************/
-	/* Public API                                                           */
-	/************************************************************************/
 
 	/**
 	*	Creates the widget and adds it to the viewport.
@@ -38,13 +30,15 @@ public:
 	*	@param offset Offset to the follow target location in world space.
 	*	@return Instance of the created widget.
 	*/
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|AllyDotWidget")
 	static UAllyDotWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector);
 
 	/**
 	*	Sets the red-to-green ratio for tint color of the dot image.
 	*	@param value Ratio. Should be in 0.0 to 1.0 range.
 	*/
-	FORCEINLINE void SetHPRatio(const float& value) { allyDotImage->SetColorAndOpacity(FLinearColor(1.0 - value, value, 0, allyDotImage->ColorAndOpacity.A)); }
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|AllyDotWidget")
+	void SetHPRatio(const float& value);
 
 	/**
 	*	Binds the red-to-green ratio for tint color of the dot image.

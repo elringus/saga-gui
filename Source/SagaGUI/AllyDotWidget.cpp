@@ -24,6 +24,11 @@ UAllyDotWidget* UAllyDotWidget::Create(APlayerController* masterController, AAct
 	return widget;
 }
 
+void UAllyDotWidget::SetHPRatio(const float& value)
+{
+	allyDotImage->SetColorAndOpacity(FLinearColor(1.0 - value, value, 0, allyDotImage->ColorAndOpacity.A));
+}
+
 void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
 {
 	FVector2D screenPos;
