@@ -45,6 +45,8 @@ void ASagaGUICharacter::BeginPlay()
 			allyDot->BindHPRatio([=]()->float{ return 500.f / FVector::Dist(GetActorLocation(), location); });
 		}
 	}
+
+	UInventoryWidget::Create(Cast<APlayerController>(GetController()));
 }
 
 void ASagaGUICharacter::ReceiveActorBeginOverlap(AActor* otherActor)

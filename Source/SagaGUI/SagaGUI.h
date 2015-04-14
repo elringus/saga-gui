@@ -12,3 +12,4 @@
 #include "AllyDotWidget.h"
 #include "FloatingTextWidget.h"
 #include "PlayerHPWidget.h"
+#include "InventoryWidget.h"
