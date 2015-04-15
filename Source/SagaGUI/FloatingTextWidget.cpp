@@ -37,12 +37,12 @@ void UFloatingTextWidget::SpawnAtPosition(APlayerController* masterController, F
 	(Cast<UCanvasPanelSlot>(widget->messageLabel->Slot))->SetPosition(screenPosition);
 }
 
-void UFloatingTextWidget::SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FLinearColor textColor /*= FLinearColor::White*/)
+void UFloatingTextWidget::SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FVector offset /*= FVector::ZeroVector*/, FLinearColor textColor /*= FLinearColor::White*/)
 {
 	auto widget = Create(masterController, message, textColor);
 
 	FVector2D screenPos;
-	masterController->ProjectWorldLocationToScreen(targetActor->GetActorLocation(), screenPos);
+	masterController->ProjectWorldLocationToScreen(targetActor->GetActorLocation() + offset, screenPos);
 	(Cast<UCanvasPanelSlot>(widget->messageLabel->Slot))->SetPosition(screenPos);
 }
 

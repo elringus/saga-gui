@@ -50,10 +50,11 @@ public:
 	*	@param masterController Controller of the player, that will own the widget.
 	*	@param targetActor Actor, which position will be transposed to the sreen space and used as a starting point for the message.
 	*	@param message Message to show.
+	*	@param offset Offset to the target actor location in world space.
 	*	@param color Text color of the message.
 	*/
 	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingTextWidget")
-	static void SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FLinearColor textColor = FLinearColor::White);
+	static void SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FVector offset = FVector::ZeroVector, FLinearColor textColor = FLinearColor::White);
 
 protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
