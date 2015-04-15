@@ -15,7 +15,6 @@ UAllyDotWidget* UAllyDotWidget::Create(APlayerController* masterController, AAct
 	auto widget = CreateWidget<UAllyDotWidget>(masterController, widgetInstance);
 	widget->followTarget = followTarget;
 	widget->masterController = masterController;
-	widget->masterActor = masterController->GetPawn();
 	widget->AddToViewport();
 	widget->offset = offset;
 
@@ -31,6 +30,8 @@ void UAllyDotWidget::SetHPRatio(const float& value)
 
 void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
 {
+	if (!masterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
+
 	FVector2D screenPos;
 	if (Cast<APlayerController>(masterController)->ProjectWorldLocationToScreen(followTarget->GetActorLocation() + offset, screenPos)) 
 	{
@@ -47,12 +48,12 @@ void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime
 		return;
 	}
 
-	if (masterActor)
+	if (masterController->GetPawn())
 	{
 		float opacity;
 		opacity = FMath::InterpExpoOut(allyDotImage->ColorAndOpacity.A,
 			(allyDotImage->ColorAndOpacity.G <= .01f) ? 0 :
-			FMath::Clamp((VisibleRadius - FVector::Dist(masterActor->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
+			FMath::Clamp((VisibleRadius - FVector::Dist(masterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
 			inDeltaTime * VisibilityTransitionSpeed);
 
 		FLinearColor color = allyDotImage->ColorAndOpacity;

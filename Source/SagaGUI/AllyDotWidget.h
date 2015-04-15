@@ -57,7 +57,6 @@ private:
 	UPROPERTY() UImage* allyDotImage;
 	UPROPERTY() AActor* followTarget;
 	UPROPERTY() AController* masterController;
-	UPROPERTY() AActor* masterActor;
 	UPROPERTY() FVector offset;
 
 	DECLARE_DELEGATE_RetVal(float, FOnTick)

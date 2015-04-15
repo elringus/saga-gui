@@ -15,7 +15,6 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 	auto widget = CreateWidget<UFloatingBarWidget>(masterController, widgetInstance);
 	widget->followTarget = followTarget;
 	widget->masterController = masterController;
-	widget->masterActor = masterController->GetPawn();
 	widget->AddToViewport();
 	widget->offset = offset;
 
@@ -34,6 +33,8 @@ void UFloatingBarWidget::SetFillAmount(const float& value)
 
 void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
 {
+	if (!masterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
+
 	FVector2D screenPos; 
 	if (Cast<APlayerController>(masterController)->ProjectWorldLocationToScreen(followTarget->GetActorLocation() + offset, screenPos))
 	{
@@ -50,12 +51,12 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDelta
 		return;
 	}
 
-	if (masterActor) 
+	if (masterController->GetPawn())
 	{
 		float opacity; 
 		opacity = FMath::InterpExpoOut(floatingBar->FillColorAndOpacity.A,
 			(!masterController->LineOfSightTo(followTarget) || floatingBar->Percent <= .01f) ? 0 :
-			FMath::Clamp((VisibleRadius - FVector::Dist(masterActor->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f), 
+			FMath::Clamp((VisibleRadius - FVector::Dist(masterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
 			inDeltaTime * VisibilityTransitionSpeed);
 
 		FLinearColor color = floatingBar->FillColorAndOpacity;
