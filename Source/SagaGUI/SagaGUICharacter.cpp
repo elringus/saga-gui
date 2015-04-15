@@ -46,7 +46,7 @@ void ASagaGUICharacter::BeginPlay()
 		}
 	}
 
-	UInventoryWidget::Create(Cast<APlayerController>(GetController()));
+	//UInventoryWidget::Create(Cast<APlayerController>(GetController()));
 }
 
 void ASagaGUICharacter::ReceiveActorBeginOverlap(AActor* otherActor)

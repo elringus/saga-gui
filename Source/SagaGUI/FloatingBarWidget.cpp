@@ -10,7 +10,7 @@ UFloatingBarWidget::UFloatingBarWidget(const class FObjectInitializer& objectIni
 	if (widgetBP.Succeeded()) widgetInstance = (UClass*)widgetBP.Object->GeneratedClass;
 }
 
-UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset)
+UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset, FLinearColor barColor)
 {
 	auto widget = CreateWidget<UFloatingBarWidget>(masterController, widgetInstance);
 	widget->followTarget = followTarget;
@@ -20,6 +20,7 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 	widget->offset = offset;
 
 	widget->floatingBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("FloatingBar")));
+	widget->floatingBar->SetFillColorAndOpacity(barColor);
 	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));
 
 	return widget;

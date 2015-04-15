@@ -28,10 +28,11 @@ public:
 	 *	@param masterController Controller of the player, that will own the widget.
 	 *	@param followTarget An actor, which the widget will allign itsels with.
 	 *	@param offset Offset to the follow target location in world space.
+	 *	@param barColor Fill color of the bar.
 	 *	@return Instance of the created widget.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingBarWidget")
-	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector);
+	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector, FLinearColor barColor = FLinearColor::Red);
 
 	/**
 	 *	Sets the fill amount of the progress bar. 
