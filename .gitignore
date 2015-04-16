@@ -78,7 +78,6 @@ $RECYCLE.BIN/
 # UE4 specific
 # =========================
 Binaries/
-Build/
 Intermediate/
 Saved/
 

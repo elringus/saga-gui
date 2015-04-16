@@ -6,8 +6,8 @@ TSubclassOf<class UInventoryWidget> UInventoryWidget::widgetInstance;
 UInventoryWidget::UInventoryWidget(const class FObjectInitializer& objectInitializer)
 	: Super(objectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<UBlueprint> widgetBP(TEXT("WidgetBlueprint'/Game/UMG/Inventory.Inventory'"));
-	if (widgetBP.Succeeded()) widgetInstance = (UClass*)widgetBP.Object->GeneratedClass;
+	static ConstructorHelpers::FObjectFinder<UClass> widgetBP(TEXT("/Game/UMG/Inventory.Inventory_C"));
+	if (widgetBP.Succeeded()) widgetInstance = widgetBP.Object;
 }
 
 UInventoryWidget* UInventoryWidget::Create(APlayerController* masterController)

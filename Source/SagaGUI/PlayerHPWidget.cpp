@@ -6,8 +6,8 @@ TSubclassOf<class UPlayerHPWidget> UPlayerHPWidget::widgetInstance;
 UPlayerHPWidget::UPlayerHPWidget(const class FObjectInitializer& objectInitializer)
 	: Super(objectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<UBlueprint> widgetBP(TEXT("WidgetBlueprint'/Game/UMG/PlayerHP.PlayerHP'"));
-	if (widgetBP.Succeeded()) widgetInstance = (UClass*)widgetBP.Object->GeneratedClass;
+	static ConstructorHelpers::FObjectFinder<UClass> widgetBP(TEXT("/Game/UMG/PlayerHP.PlayerHP_C"));
+	if (widgetBP.Succeeded()) widgetInstance = widgetBP.Object;
 }
 
 UPlayerHPWidget* UPlayerHPWidget::Create(APlayerController* masterController)

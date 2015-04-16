@@ -6,8 +6,8 @@ TSubclassOf<class UAllyDotWidget> UAllyDotWidget::widgetInstance;
 UAllyDotWidget::UAllyDotWidget(const class FObjectInitializer& objectInitializer)
 	: Super(objectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<UBlueprint> widgetBP(TEXT("WidgetBlueprint'/Game/UMG/AllyDot.AllyDot'"));
-	if (widgetBP.Succeeded()) widgetInstance = (UClass*)widgetBP.Object->GeneratedClass;
+	static ConstructorHelpers::FObjectFinder<UClass> widgetBP(TEXT("/Game/UMG/AllyDot.AllyDot_C"));
+	if (widgetBP.Succeeded()) widgetInstance = widgetBP.Object;
 }
 
 UAllyDotWidget* UAllyDotWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset)

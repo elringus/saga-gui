@@ -6,8 +6,8 @@ TSubclassOf<class UFloatingBarWidget> UFloatingBarWidget::widgetInstance;
 UFloatingBarWidget::UFloatingBarWidget(const class FObjectInitializer& objectInitializer)
 	: Super(objectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<UBlueprint> widgetBP(TEXT("WidgetBlueprint'/Game/UMG/FloatingBar.FloatingBar'"));
-	if (widgetBP.Succeeded()) widgetInstance = (UClass*)widgetBP.Object->GeneratedClass;
+	static ConstructorHelpers::FObjectFinder<UClass> widgetBP(TEXT("/Game/UMG/FloatingBar.FloatingBar_C"));
+	if (widgetBP.Succeeded()) widgetInstance = widgetBP.Object;
 }
 
 UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset, FLinearColor barColor)

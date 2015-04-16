@@ -6,8 +6,8 @@ TSubclassOf<class UFloatingTextWidget> UFloatingTextWidget::widgetInstance;
 UFloatingTextWidget::UFloatingTextWidget(const class FObjectInitializer& objectInitializer)
 	: Super(objectInitializer)
 {
-	static ConstructorHelpers::FObjectFinder<UBlueprint> widgetBP(TEXT("WidgetBlueprint'/Game/UMG/FloatingText.FloatingText'"));
-	if (widgetBP.Succeeded()) widgetInstance = (UClass*)widgetBP.Object->GeneratedClass;
+	static ConstructorHelpers::FObjectFinder<UClass> widgetBP(TEXT("/Game/UMG/FloatingText.FloatingText_C"));
+	if (widgetBP.Succeeded()) widgetInstance = widgetBP.Object;
 }
 
 UFloatingTextWidget* UFloatingTextWidget::Create(APlayerController* masterController, FString message, FLinearColor textColor)
