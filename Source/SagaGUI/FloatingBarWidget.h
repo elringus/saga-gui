@@ -63,4 +63,6 @@ private:
 
 	DECLARE_DELEGATE_RetVal(float, FOnTick)
 	FOnTick onTick;
+
+	void SetOpacity(float opacity);
 };

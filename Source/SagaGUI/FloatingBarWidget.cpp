@@ -22,6 +22,8 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 	widget->floatingBar->SetFillColorAndOpacity(barColor);
 	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));
 
+	widget->SetOpacity(0);
+
 	return widget;
 }
 
@@ -59,22 +61,26 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDelta
 			FMath::Clamp((VisibleRadius - FVector::Dist(masterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
 			inDeltaTime * VisibilityTransitionSpeed);
 
-		FLinearColor color = floatingBar->FillColorAndOpacity;
-		color.A = opacity;
-		floatingBar->SetFillColorAndOpacity(color);
-
-		color = floatingBar->WidgetStyle.BackgroundImage.TintColor.GetSpecifiedColor();
-		floatingBar->WidgetStyle.BackgroundImage.TintColor = FSlateColor(FLinearColor(color.R, color.G, color.B, opacity));
-
-		color = hpLabel->ColorAndOpacity.GetSpecifiedColor();
-		color.A = opacity;
-		hpLabel->SetColorAndOpacity(color);
-		color = hpLabel->ShadowColorAndOpacity;
-		color.A = FMath::Clamp(color.A - .2f, 0.f, 1.f);
-		hpLabel->SetShadowColorAndOpacity(color);
+		SetOpacity(opacity);
 	}
 	else GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("SagaGUI: can't find master actor for floating bar."));
 
 	if (onTick.IsBound()) SetFillAmount(onTick.Execute());
 }
 
+void UFloatingBarWidget::SetOpacity(float opacity)
+{
+	FLinearColor color = floatingBar->FillColorAndOpacity;
+	color.A = opacity;
+	floatingBar->SetFillColorAndOpacity(color);
+
+	color = floatingBar->WidgetStyle.BackgroundImage.TintColor.GetSpecifiedColor();
+	floatingBar->WidgetStyle.BackgroundImage.TintColor = FSlateColor(FLinearColor(color.R, color.G, color.B, opacity));
+
+	color = hpLabel->ColorAndOpacity.GetSpecifiedColor();
+	color.A = opacity;
+	hpLabel->SetColorAndOpacity(color);
+	color = hpLabel->ShadowColorAndOpacity;
+	color.A = FMath::Clamp(color.A - .2f, 0.f, 1.f);
+	hpLabel->SetShadowColorAndOpacity(color);
+}
