@@ -10,7 +10,7 @@ UFloatingBarWidget::UFloatingBarWidget(const class FObjectInitializer& objectIni
 	if (widgetBP.Succeeded()) widgetInstance = widgetBP.Object;
 }
 
-UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset, FLinearColor barColor)
+UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset, FLinearColor fillColor)
 {
 	auto widget = CreateWidget<UFloatingBarWidget>(masterController, widgetInstance);
 	widget->followTarget = followTarget;
@@ -19,7 +19,7 @@ UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterControll
 	widget->offset = offset;
 
 	widget->floatingBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("FloatingBar")));
-	widget->floatingBar->SetFillColorAndOpacity(barColor);
+	widget->SetFillColor(fillColor);
 	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));
 
 	widget->SetOpacity(0);
@@ -31,6 +31,11 @@ void UFloatingBarWidget::SetFillAmount(const float& value)
 {
 	floatingBar->SetPercent(value);
 	hpLabel->SetText(FText::FromString(FString::Printf(TEXT("%d%%"), (uint8)(floatingBar->Percent * 100))));
+}
+
+void UFloatingBarWidget::SetFillColor(FLinearColor fillColor)
+{
+	floatingBar->SetFillColorAndOpacity(fillColor);
 }
 
 void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)

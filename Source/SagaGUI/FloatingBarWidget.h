@@ -4,7 +4,7 @@
 #include "FloatingBarWidget.generated.h"
 
 /**
- *	Widget for floating bars. 
+ *  Widget for floating bars. 
  *  Institiates with the static Create() method.
  */
 UCLASS()
@@ -32,7 +32,7 @@ public:
 	 *	@return Instance of the created widget.
 	 */
 	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingBarWidget")
-	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector, FLinearColor barColor = FLinearColor::Red);
+	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector, FLinearColor fillColor = FLinearColor::Red);
 
 	/**
 	 *	Sets the fill amount of the progress bar. 
@@ -48,6 +48,13 @@ public:
 	*/
 	template<typename FunctorType>
 	void BindFillAmount(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
+
+	/**
+	*	Sets the fill color of the progress bar.
+	*	@param fillColor The color.
+	*/
+	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingBarWidget")
+	void SetFillColor(FLinearColor fillColor);
 
 protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
