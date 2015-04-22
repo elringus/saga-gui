@@ -1,0 +1,23 @@
+{
+	"FileVersion" : 3,
+	
+	"FriendlyName" : "Saga GUI",
+	"Version" : 1,
+	"VersionName" : "1.0",
+	"CreatedBy" : "Artyom Sovetnikov",
+	"CreatedByURL" : "http://elringus.me",
+	"EngineVersion" : "4.7.0",
+	"Description" : "GUI for the Saga project.",
+	"Category" : "Saga",
+	"EnabledByDefault" : true,
+	"CanContainContent" : false,
+	
+	"Modules" :
+	[
+		{
+			"Name" : "SGUI",
+			"Type" : "Runtime",
+			"LoadingPhase" : "PreDefault"
+		}
+	]
+}
