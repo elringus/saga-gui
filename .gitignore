@@ -10,14 +10,15 @@ Intermediate/*
 Saved/*
 Source/*
 
-/*.csproj
-/*.sln
-/*.suo
-/*.user
-/*.userprefs
-/*.pidb
-/*.booproj
-/*.sdf
-/*.opensdf
-/*.uproject
-/*.pdb
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.sdf
+*.opensdf
+*.uproject
+*.pdb
+*.dll
