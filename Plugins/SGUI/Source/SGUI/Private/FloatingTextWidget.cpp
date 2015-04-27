@@ -13,6 +13,8 @@ UFloatingTextWidget* UFloatingTextWidget::Create(APlayerController* masterContro
 
 void UFloatingTextWidget::Spawn(APlayerController* masterController, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
+	if (!masterController) return;
+
 	auto widget = Create(masterController, message, textColor);
 
 	GetSlot(widget->messageLabel)->SetPosition(GetViewportCenter());
@@ -20,13 +22,17 @@ void UFloatingTextWidget::Spawn(APlayerController* masterController, FString mes
 
 void UFloatingTextWidget::SpawnAtPosition(APlayerController* masterController, FVector2D screenPosition, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
+	if (!masterController) return;
+
 	auto widget = Create(masterController, message, textColor);
 
-	GetSlot(widget->messageLabel)->SetPosition(screenPosition);
+	GetSlot(widget->messageLabel)->SetPosition(screenPosition / GetViewportScale());
 }
 
 void UFloatingTextWidget::SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FVector offset /*= FVector::ZeroVector*/, FLinearColor textColor /*= FLinearColor::White*/)
 {
+	if (!masterController) return;
+
 	auto widget = Create(masterController, message, textColor);
 
 	FVector2D screenPos;
