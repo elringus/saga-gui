@@ -10,10 +10,6 @@ UCLASS()
 class SGUI_API USagaWidget : public UUserWidget
 {
 	GENERATED_BODY()
-	
-public:
-	USagaWidget(const class FObjectInitializer& objectInitializer);
-	static void CacheWidgetClasses();
 
 protected:
 	class APlayerController* MasterController;
@@ -53,4 +49,6 @@ protected:
 
 private:
 	static TArray<UClass*> widgetClassesCache;
+	static void CacheWidgetClasses();
+
 };
