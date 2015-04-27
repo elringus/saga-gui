@@ -13,7 +13,7 @@ class SGUI_API USagaWidget : public UUserWidget
 
 protected:
 	class APlayerController* MasterController;
-
+	
 	template<typename WidgetType>
 	static WidgetType* InstantiateWidget(APlayerController* masterController)
 	{

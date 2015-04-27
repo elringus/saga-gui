@@ -22,24 +22,24 @@ public:
 	float VisibilityTransitionSpeed = 1.f;
 
 	/**
-	*	Creates the widget and adds it to the viewport.
+	*	Creates an ally dot widget and adds it to the viewport.
 	*	@param masterController Controller of the player, that will own the widget.
 	*	@param followTarget An actor, which the widget will allign itsels with.
 	*	@param offset Offset to the follow target location in world space.
 	*	@return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|AllyDotWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Ally Dot"), Category = "SagaGUI|AllyDot")
 	static UAllyDotWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector);
 
 	/**
-	*	Sets the red-to-green ratio for tint color of the dot image.
+	*	Sets red-to-green ratio for tint color of the ally dot image.
 	*	@param value Ratio. Should be in 0.0 to 1.0 range.
 	*/
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|AllyDotWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Ally Dot HP"), Category = "SagaGUI|AllyDot")
 	void SetHPRatio(const float& value);
 
 	/**
-	*	Binds the red-to-green ratio for tint color of the dot image.
+	*	Binds red-to-green ratio for tint color of the ally dot image.
 	*	@param functor The lambda expression, which will be called on every tick to update the ratio.
 	*	Should return float and take no parameters.
 	*/

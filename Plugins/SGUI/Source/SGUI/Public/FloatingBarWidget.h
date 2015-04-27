@@ -22,25 +22,25 @@ public:
 	float VisibilityTransitionSpeed = 5.f;
 
 	/** 
-	 *	Creates the widget and adds it to the viewport.
+	 *	Creates a floating bar widget and adds it to the viewport.
 	 *	@param masterController Controller of the player, that will own the widget.
 	 *	@param followTarget An actor, which the widget will allign itsels with.
 	 *	@param offset Offset to the follow target location in world space.
 	 *	@param barColor Fill color of the bar.
 	 *	@return Instance of the created widget.
 	 */
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingBarWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Floating Bar"), Category = "SagaGUI|FloatingBar")
 	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector, FLinearColor fillColor = FLinearColor::Red);
 
 	/**
-	 *	Sets the fill amount of the progress bar. 
+	 *	Sets fill amount of the floating bar. 
 	 *	@param value Fill value. Should be in 0.0 to 1.0 range.
 	 */
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingBarWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Floating Bar HP"), Category = "SagaGUI|FloatingBar")
 	void SetFillAmount(const float& value);
 	
 	/**
-	*	Binds the fill amount of the progress bar.
+	*	Binds fill amount of the progress bar.
 	*	@param functor The lambda expression, which will be called on every tick to update fill value. 
 	*	Should return float and take no parameters.
 	*/
@@ -48,10 +48,10 @@ public:
 	void BindFillAmount(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
 
 	/**
-	*	Sets the fill color of the progress bar.
+	*	Sets fill color of the progress bar.
 	*	@param fillColor The color.
 	*/
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingBarWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Floating Bar Color"), Category = "SagaGUI|FloatingBar")
 	void SetFillColor(FLinearColor fillColor);
 
 protected:

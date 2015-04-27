@@ -14,22 +14,22 @@ class SGUI_API UPlayerHPWidget : public USagaWidget
 	
 public:
 	/**
-	*	Creates the widget and adds it to the viewport.
+	*	Creates player hp bar widget and adds it to the viewport.
 	*	@param masterController Controller of the player, that will own the widget.
 	*	@return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|PlayerHPWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Player HP Bar"), Category = "SagaGUI|PlayerHPBar")
 	static UPlayerHPWidget* Create(APlayerController* masterController);
 
 	/**
-	*	Sets the fill amount of the progress bar.
+	*	Sets fill amount of the player hp bar.
 	*	@param value Fill value. Should be in 0.0 to 1.0 range.
 	*/
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|PlayerHPWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Player HP"), Category = "SagaGUI|PlayerHPBar")
 	void SetFillAmount(const float& value);
 
 	/**
-	*	Binds the fill amount of the progress bar.
+	*	Binds fill amount of the progress bar.
 	*	@param functor The lambda expression, which will be called on every tick to update fill value.
 	*	Should return float and take no parameters.
 	*/

@@ -25,22 +25,22 @@ public:
 	float FadeSpeed = 1.f;
 	                                                                              
 	/**
-	*	Spawns a floating text message in the center of the screen.
+	*	Spawns a floating text message at the center of the screen.
 	*	@param masterController Controller of the player, that will own the widget.
 	*	@param message Message to show.
 	*	@param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingTextWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message"), Category = "SagaGUI|FloatingText")
 	static void Spawn(APlayerController* masterController, FString message, FLinearColor textColor = FLinearColor::White);
 
 	/**
-	*	Spawns a floating text message in the specified screen space position.
+	*	Spawns a floating text message at the specified screen space position.
 	*	@param masterController Controller of the player, that will own the widget.
 	*	@param screenPosition Starting position of the message in the screen space coordinates.
 	*	@param message Message to show.
 	*	@param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingTextWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Position"), Category = "SagaGUI|FloatingText")
 	static void SpawnAtPosition(APlayerController* masterController, FVector2D screenPosition, FString message, FLinearColor textColor = FLinearColor::White);
 
 	/**
@@ -51,7 +51,7 @@ public:
 	*	@param offset Offset to the target actor location in world space.
 	*	@param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, Category = "SagaGUI|FloatingTextWidget")
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Actor"), Category = "SagaGUI|FloatingText")
 	static void SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FVector offset = FVector::ZeroVector, FLinearColor textColor = FLinearColor::White);
 
 protected:

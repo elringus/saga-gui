@@ -37,7 +37,7 @@ void UFloatingTextWidget::SpawnAtActor(APlayerController* masterController, AAct
 
 	FVector2D screenPos;
 	masterController->ProjectWorldLocationToScreen(targetActor->GetActorLocation() + offset, screenPos);
-	GetSlot(widget->messageLabel)->SetPosition(screenPos);
+	GetSlot(widget->messageLabel)->SetPosition(screenPos / GetViewportScale());
 }
 
 void UFloatingTextWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
