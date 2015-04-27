@@ -8,13 +8,11 @@
  *  Institiates with the static Create() method.
  */
 UCLASS()
-class SGUI_API UPlayerHPWidget : public UUserWidget
+class SGUI_API UPlayerHPWidget : public USagaWidget
 {
 	GENERATED_BODY()
 	
 public:
-	UPlayerHPWidget(const class FObjectInitializer& objectInitializer);
-
 	/**
 	*	Creates the widget and adds it to the viewport.
 	*	@param masterController Controller of the player, that will own the widget.
@@ -42,8 +40,6 @@ protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
 
 private:
-	static TSubclassOf<class UPlayerHPWidget> widgetInstance;
-
 	UProgressBar* hpBar;
 	UTextBlock* hpLabel;
 

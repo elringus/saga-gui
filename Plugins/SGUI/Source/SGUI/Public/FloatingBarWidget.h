@@ -8,19 +8,17 @@
  *  Institiates with the static Create() method.
  */
 UCLASS()
-class SGUI_API UFloatingBarWidget : public UUserWidget
+class SGUI_API UFloatingBarWidget : public USagaWidget
 {
 	GENERATED_BODY()
 	
 public:
-	UFloatingBarWidget(const class FObjectInitializer& objectInitializer);
-
 	/* Hide the widget, when distane between follow target and the master controller is more than this value. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|Floating bar parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
 	float VisibleRadius = 1500.f;
 
 	/* Speed of revealing\hiding the widget, controlled by visible radius. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|Floating bar parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
 	float VisibilityTransitionSpeed = 5.f;
 
 	/** 
@@ -60,12 +58,9 @@ protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
 
 private:
-	static TSubclassOf<class UFloatingBarWidget> widgetInstance;
-
 	UPROPERTY() UProgressBar* floatingBar;
 	UPROPERTY() UTextBlock* hpLabel;
 	UPROPERTY() AActor* followTarget;
-	UPROPERTY() AController* masterController;
 	UPROPERTY() FVector offset;
 
 	DECLARE_DELEGATE_RetVal(float, FOnTick)

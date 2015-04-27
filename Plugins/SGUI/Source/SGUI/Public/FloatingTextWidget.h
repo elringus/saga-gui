@@ -11,19 +11,17 @@
  *	The particular instances of the widget will be destroyed abutomatically.
  */
 UCLASS()
-class SGUI_API UFloatingTextWidget : public UUserWidget
+class SGUI_API UFloatingTextWidget : public USagaWidget
 {
 	GENERATED_BODY()
 	
 public:
-	UFloatingTextWidget(const class FObjectInitializer& objectInitializer);
-
 	/* Floating speed of the messages. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|Floating text parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
 	float FloatingSpeed = 10.f;
 
 	/* How fast the message will fade out. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|Floating text parameters")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
 	float FadeSpeed = 1.f;
 	                                                                              
 	/**
@@ -60,11 +58,9 @@ protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
 
 private:
-	static UFloatingTextWidget* Create(APlayerController* masterController, FString message, FLinearColor color);
-	static TSubclassOf<class UFloatingTextWidget> widgetInstance;
-
-	void SetColor(const FLinearColor& color);
-
 	UPROPERTY() UTextBlock* messageLabel;
+
+	static UFloatingTextWidget* Create(APlayerController* masterController, FString message, FLinearColor textColor);
+	void SetColor(const FLinearColor& color);
 	
 };

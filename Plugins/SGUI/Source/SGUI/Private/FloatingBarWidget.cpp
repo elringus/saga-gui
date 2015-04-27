@@ -1,21 +1,10 @@
 #include "SGUI.h"
 #include "FloatingBarWidget.h"
 
-TSubclassOf<class UFloatingBarWidget> UFloatingBarWidget::widgetInstance;
-
-UFloatingBarWidget::UFloatingBarWidget(const class FObjectInitializer& objectInitializer)
-	: Super(objectInitializer)
-{
-	static ConstructorHelpers::FObjectFinder<UClass> widgetBP(TEXT("/Game/SGUI/UMG/FloatingBar.FloatingBar_C"));
-	if (widgetBP.Succeeded()) widgetInstance = widgetBP.Object;
-}
-
 UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset, FLinearColor fillColor)
 {
-	auto widget = CreateWidget<UFloatingBarWidget>(masterController, widgetInstance);
+	auto widget = InstantiateWidget<UFloatingBarWidget>(masterController);
 	widget->followTarget = followTarget;
-	widget->masterController = masterController;
-	widget->AddToViewport();
 	widget->offset = offset;
 
 	widget->floatingBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("FloatingBar")));
@@ -40,35 +29,33 @@ void UFloatingBarWidget::SetFillColor(FLinearColor fillColor)
 
 void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
 {
-	if (!masterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
+	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
 
-	FVector2D screenPos; 
-	if (Cast<APlayerController>(masterController)->ProjectWorldLocationToScreen(followTarget->GetActorLocation() + offset, screenPos))
+	FVector targetLocation = followTarget->GetActorLocation() + offset;
+	auto pivotCorrection = FVector2D(GetSlot(floatingBar)->GetSize().X / 2, 0) * GetViewportScale();
+	if (SetPositionFromWorld(targetLocation, pivotCorrection))
 	{
 		floatingBar->SetVisibility(ESlateVisibility::Visible);
-
-		Scalability::FQualityLevels scalabilityQuality = Scalability::GetQualityLevels();
-		float qualityScale = (scalabilityQuality.ResolutionQuality / 100.0f);
-
-		SetPositionInViewport(screenPos / qualityScale - FVector2D(Cast<UCanvasPanelSlot>(floatingBar->Slot)->GetSize().X / 2, 0));
+		hpLabel->SetVisibility(ESlateVisibility::Visible);
 	}
 	else
 	{
 		floatingBar->SetVisibility(ESlateVisibility::Hidden);
+		hpLabel->SetVisibility(ESlateVisibility::Hidden);
 		return;
 	}
 
-	if (masterController->GetPawn())
+	if (MasterController->GetPawn())
 	{
 		float opacity; 
 		opacity = FMath::InterpExpoOut(floatingBar->FillColorAndOpacity.A,
-			(!masterController->LineOfSightTo(followTarget) || floatingBar->Percent <= .01f) ? 0 :
-			FMath::Clamp((VisibleRadius - FVector::Dist(masterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
+			(!MasterController->LineOfSightTo(followTarget) || floatingBar->Percent <= .01f) ? 0 :
+			FMath::Clamp((VisibleRadius - FVector::Dist(MasterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
 			inDeltaTime * VisibilityTransitionSpeed);
 
 		SetOpacity(opacity);
 	}
-	else GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("SagaGUI: can't find master actor for floating bar."));
+	else SetOpacity(0);
 
 	if (onTick.IsBound()) SetFillAmount(onTick.Execute());
 }

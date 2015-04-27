@@ -8,20 +8,18 @@
  *	Institiates with the static Create() method.
  */
 UCLASS()
-class SGUI_API UAllyDotWidget : public UUserWidget
+class SGUI_API UAllyDotWidget : public USagaWidget
 {
 	GENERATED_BODY()
 	
 public:
-	UAllyDotWidget(const class FObjectInitializer& objectInitializer);
-
 	/* Hide the widget, when distane between follow target and the master controller is more than this value. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|AllyDotWidget")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
 	float VisibleRadius = 3000.f;
 
 	/* Speed of revealing\hiding the widget, controlled by visible radius. */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI|AllyDotWidget")
-	float VisibilityTransitionSpeed = 5.f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
+	float VisibilityTransitionSpeed = 1.f;
 
 	/**
 	*	Creates the widget and adds it to the viewport.
@@ -52,11 +50,8 @@ protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
 
 private:
-	static TSubclassOf<class UAllyDotWidget> widgetInstance;
-
 	UPROPERTY() UImage* allyDotImage;
 	UPROPERTY() AActor* followTarget;
-	UPROPERTY() AController* masterController;
 	UPROPERTY() FVector offset;
 
 	DECLARE_DELEGATE_RetVal(float, FOnTick)
