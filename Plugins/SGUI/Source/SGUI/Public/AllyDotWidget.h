@@ -50,9 +50,9 @@ protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
 
 private:
-	UPROPERTY() UImage* allyDotImage;
-	UPROPERTY() AActor* followTarget;
-	UPROPERTY() FVector offset;
+	UImage* allyDotImage;
+	AActor* followTarget;
+	FVector offset;
 
 	DECLARE_DELEGATE_RetVal(float, FOnTick)
 	FOnTick onTick;

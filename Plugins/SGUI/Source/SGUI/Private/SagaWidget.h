@@ -13,6 +13,7 @@ class SGUI_API USagaWidget : public UUserWidget
 	
 public:
 	USagaWidget(const class FObjectInitializer& objectInitializer);
+	static void CacheWidgetClasses();
 
 protected:
 	class APlayerController* MasterController;
@@ -20,7 +21,9 @@ protected:
 	template<typename WidgetType>
 	static WidgetType* InstantiateWidget(APlayerController* masterController)
 	{
-		auto widgetClass = widgetClassesCache.FindByPredicate([](TSubclassOf<class USagaWidget> wc){ return Cast<WidgetType>(wc.GetDefaultObject()); });
+		CacheWidgetClasses();
+
+		auto widgetClass = widgetClassesCache.FindByPredicate([](UClass* wc){ return Cast<WidgetType>(wc->GetDefaultObject()); });
 		if (!widgetClass) throw ("SagaGUI: Can't find widget class in the cache.");
 
 		auto widget = CreateWidget<USagaWidget>(masterController, *widgetClass);
@@ -49,5 +52,5 @@ protected:
 	}
 
 private:
-	static TArray<TSubclassOf<class USagaWidget>> widgetClassesCache;
+	static TArray<UClass*> widgetClassesCache;
 };
