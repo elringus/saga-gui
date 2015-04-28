@@ -8,11 +8,11 @@ void USagaWidget::CacheWidgetClasses()
 	if (widgetClassesCache.Num() > 0) return;
 
 	TArray<FString> widgetPaths;
-	widgetPaths.Add(TEXT("/Game/SGUI/UMG/AllyDot.AllyDot_C"));
-	widgetPaths.Add(TEXT("/Game/SGUI/UMG/FloatingBar.FloatingBar_C"));
-	widgetPaths.Add(TEXT("/Game/SGUI/UMG/FloatingText.FloatingText_C"));
-	widgetPaths.Add(TEXT("/Game/SGUI/UMG/Inventory.Inventory_C"));
-	widgetPaths.Add(TEXT("/Game/SGUI/UMG/PlayerHP.PlayerHP_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/AllyDot/AllyDot.AllyDot_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/FloatingBar/FloatingBar.FloatingBar_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/FloatingText/FloatingText.FloatingText_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/Inventory/Inventory.Inventory_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/PlayerHP/PlayerHP.PlayerHP_C"));
 
 	for (int i = 0; i < widgetPaths.Num(); i++)
 	{
