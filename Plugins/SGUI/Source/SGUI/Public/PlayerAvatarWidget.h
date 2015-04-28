@@ -22,10 +22,10 @@ public:
 
 	/**
 	*	Sets image of the player avatar.
-	*	@param value The image.
+	*	@param texture The texture to use with the image for player avatar.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Player Avatar Image"), Category = "SagaGUI|PlayerAvatar")
-	void SetImage(const float& value);
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Player Avatar Texture"), Category = "SagaGUI|PlayerAvatar")
+	void SetTexture(UTexture2D* texture);
 
 private:
 	UImage* avatarImage;

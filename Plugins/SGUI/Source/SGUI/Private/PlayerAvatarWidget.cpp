@@ -11,7 +11,7 @@ UPlayerAvatarWidget* UPlayerAvatarWidget::Create()
 }
 
 
-void UPlayerAvatarWidget::SetImage(const float& value)
+void UPlayerAvatarWidget::SetTexture(UTexture2D* texture)
 {
-
+	avatarImage->SetBrushFromTexture(texture);
 }
