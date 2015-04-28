@@ -15,11 +15,10 @@ class SGUI_API UPlayerHPWidget : public USagaWidget
 public:
 	/**
 	*	Creates player hp bar widget and adds it to the viewport.
-	*	@param masterController Controller of the player, that will own the widget.
 	*	@return Instance of the created widget.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Player HP Bar"), Category = "SagaGUI|PlayerHPBar")
-	static UPlayerHPWidget* Create(APlayerController* masterController);
+	static UPlayerHPWidget* Create();
 
 	/**
 	*	Sets fill amount of the player hp bar.

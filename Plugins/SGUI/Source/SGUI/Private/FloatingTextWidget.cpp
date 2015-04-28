@@ -1,9 +1,9 @@
 #include "SGUI.h"
 #include "FloatingTextWidget.h"
 
-UFloatingTextWidget* UFloatingTextWidget::Create(APlayerController* masterController, FString message, FLinearColor textColor)
+UFloatingTextWidget* UFloatingTextWidget::Create(FString message, FLinearColor textColor)
 {
-	auto widget = InstantiateWidget<UFloatingTextWidget>(masterController);
+	auto widget = InstantiateWidget<UFloatingTextWidget>();
 	widget->messageLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("MessageLabel")));
 	widget->messageLabel->SetText(FText::FromString(message));
 	widget->SetColor(textColor);
@@ -11,32 +11,32 @@ UFloatingTextWidget* UFloatingTextWidget::Create(APlayerController* masterContro
 	return widget;
 }
 
-void UFloatingTextWidget::Spawn(APlayerController* masterController, FString message, FLinearColor textColor /*= FLinearColor::White*/)
+void UFloatingTextWidget::Spawn(FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!masterController) return;
+	if (!GEngine) return;
 
-	auto widget = Create(masterController, message, textColor);
+	auto widget = Create(message, textColor);
 
 	GetSlot(widget->messageLabel)->SetPosition(GetViewportCenter());
 }
 
-void UFloatingTextWidget::SpawnAtPosition(APlayerController* masterController, FVector2D screenPosition, FString message, FLinearColor textColor /*= FLinearColor::White*/)
+void UFloatingTextWidget::SpawnAtPosition(FVector2D screenPosition, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!masterController) return;
+	if (!GEngine) return;
 
-	auto widget = Create(masterController, message, textColor);
+	auto widget = Create(message, textColor);
 
 	GetSlot(widget->messageLabel)->SetPosition(screenPosition / GetViewportScale());
 }
 
-void UFloatingTextWidget::SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FVector offset /*= FVector::ZeroVector*/, FLinearColor textColor /*= FLinearColor::White*/)
+void UFloatingTextWidget::SpawnAtActor(AActor* targetActor, FString message, FVector offset /*= FVector::ZeroVector*/, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!masterController) return;
+	if (!GEngine) return;
 
-	auto widget = Create(masterController, message, textColor);
+	auto widget = Create(message, textColor);
 
 	FVector2D screenPos;
-	masterController->ProjectWorldLocationToScreen(targetActor->GetActorLocation() + offset, screenPos);
+	widget->MasterController->ProjectWorldLocationToScreen(targetActor->GetActorLocation() + offset, screenPos);
 	GetSlot(widget->messageLabel)->SetPosition(screenPos / GetViewportScale());
 }
 

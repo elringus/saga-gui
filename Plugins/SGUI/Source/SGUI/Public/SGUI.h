@@ -18,3 +18,5 @@
 #include "FloatingTextWidget.h"
 #include "PlayerHPWidget.h"
 #include "InventoryWidget.h"
+
+DECLARE_LOG_CATEGORY_EXTERN(SagaGUI, Log, All);

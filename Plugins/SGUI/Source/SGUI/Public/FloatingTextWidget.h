@@ -26,33 +26,30 @@ public:
 	                                                                              
 	/**
 	*	Spawns a floating text message at the center of the screen.
-	*	@param masterController Controller of the player, that will own the widget.
 	*	@param message Message to show.
 	*	@param color Text color of the message.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message"), Category = "SagaGUI|FloatingText")
-	static void Spawn(APlayerController* masterController, FString message, FLinearColor textColor = FLinearColor::White);
+	static void Spawn(FString message, FLinearColor textColor = FLinearColor::White);
 
 	/**
 	*	Spawns a floating text message at the specified screen space position.
-	*	@param masterController Controller of the player, that will own the widget.
 	*	@param screenPosition Starting position of the message in the screen space coordinates.
 	*	@param message Message to show.
 	*	@param color Text color of the message.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Position"), Category = "SagaGUI|FloatingText")
-	static void SpawnAtPosition(APlayerController* masterController, FVector2D screenPosition, FString message, FLinearColor textColor = FLinearColor::White);
+	static void SpawnAtPosition(FVector2D screenPosition, FString message, FLinearColor textColor = FLinearColor::White);
 
 	/**
 	*	Spawns a floating text message relative to the specified target actor.
-	*	@param masterController Controller of the player, that will own the widget.
 	*	@param targetActor Actor, which position will be transposed to the sreen space and used as a starting point for the message.
 	*	@param message Message to show.
 	*	@param offset Offset to the target actor location in world space.
 	*	@param color Text color of the message.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Actor"), Category = "SagaGUI|FloatingText")
-	static void SpawnAtActor(APlayerController* masterController, AActor* targetActor, FString message, FVector offset = FVector::ZeroVector, FLinearColor textColor = FLinearColor::White);
+	static void SpawnAtActor(AActor* targetActor, FString message, FVector offset = FVector::ZeroVector, FLinearColor textColor = FLinearColor::White);
 
 protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
@@ -60,7 +57,7 @@ protected:
 private:
 	UPROPERTY() UTextBlock* messageLabel;
 
-	static UFloatingTextWidget* Create(APlayerController* masterController, FString message, FLinearColor textColor);
+	static UFloatingTextWidget* Create(FString message, FLinearColor textColor);
 	void SetColor(const FLinearColor& color);
 	
 };

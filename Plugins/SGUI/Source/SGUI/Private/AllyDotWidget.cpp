@@ -1,9 +1,9 @@
 #include "SGUI.h"
 #include "AllyDotWidget.h"
 
-UAllyDotWidget* UAllyDotWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset)
+UAllyDotWidget* UAllyDotWidget::Create(AActor* followTarget, FVector offset)
 {
-	auto widget = InstantiateWidget<UAllyDotWidget>(masterController);
+	auto widget = InstantiateWidget<UAllyDotWidget>();
 	widget->followTarget = followTarget;
 	widget->offset = offset;
 

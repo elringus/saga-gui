@@ -1,9 +1,9 @@
 #include "SGUI.h"
 #include "InventoryWidget.h"
 
-UInventoryWidget* UInventoryWidget::Create(APlayerController* masterController)
+UInventoryWidget* UInventoryWidget::Create()
 {
-	auto widget = InstantiateWidget<UInventoryWidget>(masterController);
+	auto widget = InstantiateWidget<UInventoryWidget>();
 
 	return widget;
 }

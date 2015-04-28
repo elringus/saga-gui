@@ -15,12 +15,17 @@ protected:
 	class APlayerController* MasterController;
 	
 	template<typename WidgetType>
-	static WidgetType* InstantiateWidget(APlayerController* masterController)
+	static WidgetType* InstantiateWidget()
 	{
 		CacheWidgetClasses();
 
 		auto widgetClass = widgetClassesCache.FindByPredicate([](UClass* wc){ return Cast<WidgetType>(wc->GetDefaultObject()); });
-		if (!widgetClass) throw ("SagaGUI: Can't find widget class in the cache.");
+		if (!widgetClass) UE_LOG(SagaGUI, Fatal, TEXT("InstantiateWidget(): Can't find widget class in the cache."));
+
+		APlayerController* masterController = nullptr;
+		for (TObjectIterator<APlayerController> pc; pc; ++pc)
+			if (pc->bActorInitialized) { masterController = *pc; break; }
+		if (!masterController) UE_LOG(SagaGUI, Fatal, TEXT("InstantiateWidget(): Can't get player controller."));
 
 		auto widget = CreateWidget<USagaWidget>(masterController, *widgetClass);
 

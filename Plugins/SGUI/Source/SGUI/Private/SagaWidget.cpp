@@ -12,6 +12,7 @@ void USagaWidget::CacheWidgetClasses()
 	widgetPaths.Add(TEXT("/Game/SGUI/FloatingBar/FloatingBar.FloatingBar_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/FloatingText/FloatingText.FloatingText_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/Inventory/Inventory.Inventory_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/PlayerAvatar/PlayerAvatar.PlayerAvatar_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/PlayerHP/PlayerHP.PlayerHP_C"));
 
 	for (int i = 0; i < widgetPaths.Num(); i++)

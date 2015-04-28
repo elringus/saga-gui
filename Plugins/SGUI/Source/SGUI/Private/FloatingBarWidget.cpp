@@ -1,9 +1,9 @@
 #include "SGUI.h"
 #include "FloatingBarWidget.h"
 
-UFloatingBarWidget* UFloatingBarWidget::Create(APlayerController* masterController, AActor* followTarget, FVector offset, FLinearColor fillColor)
+UFloatingBarWidget* UFloatingBarWidget::Create(AActor* followTarget, FVector offset, FLinearColor fillColor)
 {
-	auto widget = InstantiateWidget<UFloatingBarWidget>(masterController);
+	auto widget = InstantiateWidget<UFloatingBarWidget>();
 	widget->followTarget = followTarget;
 	widget->offset = offset;
 

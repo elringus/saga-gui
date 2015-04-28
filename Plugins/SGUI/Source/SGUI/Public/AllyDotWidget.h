@@ -23,13 +23,12 @@ public:
 
 	/**
 	*	Creates an ally dot widget and adds it to the viewport.
-	*	@param masterController Controller of the player, that will own the widget.
 	*	@param followTarget An actor, which the widget will allign itsels with.
 	*	@param offset Offset to the follow target location in world space.
 	*	@return Instance of the created widget.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Ally Dot"), Category = "SagaGUI|AllyDot")
-	static UAllyDotWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector);
+	static UAllyDotWidget* Create(AActor* followTarget, FVector offset = FVector::ZeroVector);
 
 	/**
 	*	Sets red-to-green ratio for tint color of the ally dot image.

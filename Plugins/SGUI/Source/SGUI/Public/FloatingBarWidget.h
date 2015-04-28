@@ -23,14 +23,13 @@ public:
 
 	/** 
 	 *	Creates a floating bar widget and adds it to the viewport.
-	 *	@param masterController Controller of the player, that will own the widget.
 	 *	@param followTarget An actor, which the widget will allign itsels with.
 	 *	@param offset Offset to the follow target location in world space.
 	 *	@param barColor Fill color of the bar.
 	 *	@return Instance of the created widget.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Floating Bar"), Category = "SagaGUI|FloatingBar")
-	static UFloatingBarWidget* Create(APlayerController* masterController, AActor* followTarget, FVector offset = FVector::ZeroVector, FLinearColor fillColor = FLinearColor::Red);
+	static UFloatingBarWidget* Create(AActor* followTarget, FVector offset = FVector::ZeroVector, FLinearColor fillColor = FLinearColor::Red);
 
 	/**
 	 *	Sets fill amount of the floating bar. 
