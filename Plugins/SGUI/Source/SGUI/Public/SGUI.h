@@ -20,3 +20,16 @@
 #include "InventoryWidget.h"
 
 DECLARE_LOG_CATEGORY_EXTERN(SagaGUI, Log, All);
+
+FORCEINLINE APlayerController* GetPlayerController()
+{
+	for (TObjectIterator<APlayerController> pc; pc; ++pc)
+		if (pc->bActorInitialized) return *pc;
+
+	return nullptr;
+}
+
+FORCEINLINE bool IsGameRunning()
+{
+	return GetPlayerController() ? true : false;
+}

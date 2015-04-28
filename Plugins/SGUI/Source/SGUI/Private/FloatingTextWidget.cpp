@@ -13,7 +13,7 @@ UFloatingTextWidget* UFloatingTextWidget::Create(FString message, FLinearColor t
 
 void UFloatingTextWidget::Spawn(FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!GEngine) return;
+	if (!IsGameRunning()) return;
 
 	auto widget = Create(message, textColor);
 
@@ -22,7 +22,7 @@ void UFloatingTextWidget::Spawn(FString message, FLinearColor textColor /*= FLin
 
 void UFloatingTextWidget::SpawnAtPosition(FVector2D screenPosition, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!GEngine) return;
+	if (!IsGameRunning()) return;
 
 	auto widget = Create(message, textColor);
 
@@ -31,7 +31,7 @@ void UFloatingTextWidget::SpawnAtPosition(FVector2D screenPosition, FString mess
 
 void UFloatingTextWidget::SpawnAtActor(AActor* targetActor, FString message, FVector offset /*= FVector::ZeroVector*/, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!GEngine) return;
+	if (!IsGameRunning()) return;
 
 	auto widget = Create(message, textColor);
 
