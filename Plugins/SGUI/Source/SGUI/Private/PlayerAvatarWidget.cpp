@@ -1,9 +1,9 @@
 #include "SGUI.h"
 #include "PlayerAvatarWidget.h"
 
-UPlayerAvatarWidget* UPlayerAvatarWidget::Create()
+UPlayerAvatarWidget* UPlayerAvatarWidget::Create(UObject* worldContextObject)
 {
-	auto widget = InstantiateWidget<UPlayerAvatarWidget>();
+	auto widget = InstantiateWidget<UPlayerAvatarWidget>(worldContextObject);
 
 	widget->avatarImage = Cast<UImage>(widget->GetWidgetFromName(TEXT("AvatarImage")));
 

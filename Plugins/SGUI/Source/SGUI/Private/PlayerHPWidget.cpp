@@ -1,9 +1,9 @@
 #include "SGUI.h"
 #include "PlayerHPWidget.h"
 
-UPlayerHPWidget* UPlayerHPWidget::Create()
+UPlayerHPWidget* UPlayerHPWidget::Create(UObject* worldContextObject)
 {
-	auto widget = InstantiateWidget<UPlayerHPWidget>();
+	auto widget = InstantiateWidget<UPlayerHPWidget>(worldContextObject);
 
 	widget->hpBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("HPBar")));
 	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));

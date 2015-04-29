@@ -4,7 +4,7 @@
 #include "SagaWidget.generated.h"
 
 /**
- *	Base class for all the widgets implementations.
+ *  Base class for all the widgets implementations.
  */
 UCLASS()
 class SGUI_API USagaWidget : public UUserWidget
@@ -15,14 +15,14 @@ protected:
 	class APlayerController* MasterController;
 	
 	template<typename WidgetType>
-	static WidgetType* InstantiateWidget()
+	static WidgetType* InstantiateWidget(UObject* worldContextObject = nullptr)
 	{
 		CacheWidgetClasses();
 
 		auto widgetClass = widgetClassesCache.FindByPredicate([](UClass* wc){ return Cast<WidgetType>(wc->GetDefaultObject()); });
 		if (!widgetClass) UE_LOG(SagaGUI, Fatal, TEXT("InstantiateWidget(): Can't find widget class in the cache."));
 
-		auto masterController = GetPlayerController();
+		auto masterController = GetPlayerController(worldContextObject);
 		if (!masterController) UE_LOG(SagaGUI, Fatal, TEXT("InstantiateWidget(): Can't get player controller."));
 
 		auto widget = CreateWidget<USagaWidget>(masterController, *widgetClass);

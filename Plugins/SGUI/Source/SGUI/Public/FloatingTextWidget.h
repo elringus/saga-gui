@@ -25,31 +25,37 @@ public:
 	float FadeSpeed = 1.f;
 	                                                                              
 	/**
-	*	Spawns a floating text message at the center of the screen.
-	*	@param message Message to show.
-	*	@param color Text color of the message.
+	*  Spawns a floating text message at the center of the screen.
+	*  @param worldContextObject Any UObject to get world context from.
+	*  @param message Message to show.
+	*  @param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message"), Category = "SagaGUI|FloatingText")
-	static void Spawn(FString message, FLinearColor textColor = FLinearColor::White);
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message", 
+		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|FloatingText")
+	static void Spawn(UObject* worldContextObject, FString message, FLinearColor textColor = FLinearColor::White);
 
 	/**
-	*	Spawns a floating text message at the specified screen space position.
-	*	@param screenPosition Starting position of the message in the screen space coordinates.
-	*	@param message Message to show.
-	*	@param color Text color of the message.
+	*  Spawns a floating text message at the specified screen space position.
+	*  @param worldContextObject Any UObject to get world context from.
+	*  @param screenPosition Starting position of the message in the screen space coordinates.
+	*  @param message Message to show.
+	*  @param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Position"), Category = "SagaGUI|FloatingText")
-	static void SpawnAtPosition(FVector2D screenPosition, FString message, FLinearColor textColor = FLinearColor::White);
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Position", 
+		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|FloatingText")
+	static void SpawnAtPosition(UObject* worldContextObject, FVector2D screenPosition, FString message, FLinearColor textColor = FLinearColor::White);
 
 	/**
-	*	Spawns a floating text message relative to the specified target actor.
-	*	@param targetActor Actor, which position will be transposed to the sreen space and used as a starting point for the message.
-	*	@param message Message to show.
-	*	@param offset Offset to the target actor location in world space.
-	*	@param color Text color of the message.
+	*  Spawns a floating text message relative to the specified target actor.
+	*  @param worldContextObject Any UObject to get world context from.
+	*  @param targetActor Actor, which position will be transposed to the sreen space and used as a starting point for the message.
+	*  @param message Message to show.
+	*  @param offset Offset to the target actor location in world space.
+	*  @param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Actor"), Category = "SagaGUI|FloatingText")
-	static void SpawnAtActor(AActor* targetActor, FString message, FVector offset = FVector::ZeroVector, FLinearColor textColor = FLinearColor::White);
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Actor", 
+		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|FloatingText")
+	static void SpawnAtActor(UObject* worldContextObject, AActor* targetActor, FString message, FVector offset = FVector::ZeroVector, FLinearColor textColor = FLinearColor::White);
 
 protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
@@ -57,7 +63,7 @@ protected:
 private:
 	UPROPERTY() UTextBlock* messageLabel;
 
-	static UFloatingTextWidget* Create(FString message, FLinearColor textColor);
+	static UFloatingTextWidget* Create(UObject* worldContextObject, FString message, FLinearColor textColor);
 	void SetColor(const FLinearColor& color);
 	
 };

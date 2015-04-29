@@ -1,9 +1,9 @@
 #include "SGUI.h"
 #include "InventoryWidget.h"
 
-UInventoryWidget* UInventoryWidget::Create()
+UInventoryWidget* UInventoryWidget::Create(UObject* worldContextObject)
 {
-	auto widget = InstantiateWidget<UInventoryWidget>();
+	auto widget = InstantiateWidget<UInventoryWidget>(worldContextObject);
 
 	return widget;
 }

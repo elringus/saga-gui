@@ -1,9 +1,9 @@
 #include "SGUI.h"
 #include "FloatingTextWidget.h"
 
-UFloatingTextWidget* UFloatingTextWidget::Create(FString message, FLinearColor textColor)
+UFloatingTextWidget* UFloatingTextWidget::Create(UObject* worldContextObject, FString message, FLinearColor textColor)
 {
-	auto widget = InstantiateWidget<UFloatingTextWidget>();
+	auto widget = InstantiateWidget<UFloatingTextWidget>(worldContextObject);
 	widget->messageLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("MessageLabel")));
 	widget->messageLabel->SetText(FText::FromString(message));
 	widget->SetColor(textColor);
@@ -11,29 +11,29 @@ UFloatingTextWidget* UFloatingTextWidget::Create(FString message, FLinearColor t
 	return widget;
 }
 
-void UFloatingTextWidget::Spawn(FString message, FLinearColor textColor /*= FLinearColor::White*/)
+void UFloatingTextWidget::Spawn(UObject* worldContextObject, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
 	if (!IsGameRunning()) return;
 
-	auto widget = Create(message, textColor);
+	auto widget = Create(worldContextObject, message, textColor);
 
 	GetSlot(widget->messageLabel)->SetPosition(GetViewportCenter());
 }
 
-void UFloatingTextWidget::SpawnAtPosition(FVector2D screenPosition, FString message, FLinearColor textColor /*= FLinearColor::White*/)
+void UFloatingTextWidget::SpawnAtPosition(UObject* worldContextObject, FVector2D screenPosition, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
 	if (!IsGameRunning()) return;
 
-	auto widget = Create(message, textColor);
+	auto widget = Create(worldContextObject, message, textColor);
 
 	GetSlot(widget->messageLabel)->SetPosition(screenPosition / GetViewportScale());
 }
 
-void UFloatingTextWidget::SpawnAtActor(AActor* targetActor, FString message, FVector offset /*= FVector::ZeroVector*/, FLinearColor textColor /*= FLinearColor::White*/)
+void UFloatingTextWidget::SpawnAtActor(UObject* worldContextObject, AActor* targetActor, FString message, FVector offset /*= FVector::ZeroVector*/, FLinearColor textColor /*= FLinearColor::White*/)
 {
 	if (!IsGameRunning()) return;
 
-	auto widget = Create(message, textColor);
+	auto widget = Create(worldContextObject, message, textColor);
 
 	FVector2D screenPos;
 	widget->MasterController->ProjectWorldLocationToScreen(targetActor->GetActorLocation() + offset, screenPos);
