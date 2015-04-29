@@ -4,11 +4,11 @@
 #include "FloatingTextWidget.generated.h"
 
 /**
- *	Widget for floating text messages.
- *	As of the transient nature of the widget, it doesn't have the Create() method
- *	and won't return its intance. Instead, you will create messages by calling
- *	overloaded static Spawn() methods.
- *	The particular instances of the widget will be destroyed abutomatically.
+ *  Widget for floating text messages.
+ *  As of the transient nature of the widget, it doesn't have the Create() method
+ *  and won't return its intance. Instead, you will create messages by calling
+ *  overloaded static Spawn() methods.
+ *  The particular instances of the widget will be destroyed abutomatically.
  */
 UCLASS()
 class SGUI_API UFloatingTextWidget : public USagaWidget

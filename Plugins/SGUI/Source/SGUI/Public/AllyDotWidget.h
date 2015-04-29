@@ -5,7 +5,7 @@
 
 /**
  *  Widget for showing status of an ally in form of a color dot. 
- *	Institiates with the static Create() method.
+ *  Institiates with the static Create() method.
  */
 UCLASS()
 class SGUI_API UAllyDotWidget : public USagaWidget

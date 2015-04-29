@@ -20,7 +20,6 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Inventory Window", 
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|Inventory")
-	
-		static UInventoryWidget* Create(UObject* worldContextObject);
+	static UInventoryWidget* Create(UObject* worldContextObject);
 	
 };
