@@ -13,7 +13,7 @@ UFloatingTextWidget* UFloatingTextWidget::Create(UObject* worldContextObject, FS
 
 void UFloatingTextWidget::Spawn(UObject* worldContextObject, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!IsGameRunning()) return;
+	if (!IsGameRunning(worldContextObject)) return;
 
 	auto widget = Create(worldContextObject, message, textColor);
 
@@ -22,7 +22,7 @@ void UFloatingTextWidget::Spawn(UObject* worldContextObject, FString message, FL
 
 void UFloatingTextWidget::SpawnAtPosition(UObject* worldContextObject, FVector2D screenPosition, FString message, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!IsGameRunning()) return;
+	if (!IsGameRunning(worldContextObject)) return;
 
 	auto widget = Create(worldContextObject, message, textColor);
 
@@ -31,7 +31,7 @@ void UFloatingTextWidget::SpawnAtPosition(UObject* worldContextObject, FVector2D
 
 void UFloatingTextWidget::SpawnAtActor(UObject* worldContextObject, AActor* targetActor, FString message, FVector offset /*= FVector::ZeroVector*/, FLinearColor textColor /*= FLinearColor::White*/)
 {
-	if (!IsGameRunning()) return;
+	if (!IsGameRunning(worldContextObject)) return;
 
 	auto widget = Create(worldContextObject, message, textColor);
 

@@ -48,7 +48,7 @@ FORCEINLINE APlayerController* GetPlayerController(UObject* worldContextObject =
 *  A hack to know if we are currently in editor mode or game simulation is running.
 *  @return True if game is running.
 */
-FORCEINLINE bool IsGameRunning()
+FORCEINLINE bool IsGameRunning(UObject* worldContextObject)
 {
-	return GetPlayerController() ? true : false;
+	return GetPlayerController(worldContextObject) ? true : false;
 }
