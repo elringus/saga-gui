@@ -13,11 +13,13 @@
 #include "Runtime/Engine/Classes/Engine/RendererSettings.h"
 
 #include "SagaWidget.h"
-#include "FloatingBarWidget.h"
+#include "ActionBarWidget.h"
 #include "AllyDotWidget.h"
+#include "FloatingBarWidget.h"
 #include "FloatingTextWidget.h"
-#include "PlayerHPWidget.h"
 #include "InventoryWidget.h"
+#include "PlayerAvatarWidget.h"
+#include "PlayerHPWidget.h"
 
 #define Print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, text)
 
