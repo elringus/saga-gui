@@ -13,6 +13,7 @@
 #include "Runtime/Engine/Classes/Engine/RendererSettings.h"
 
 #include "SagaWidget.h"
+#include "ActionBarButtonWidget.h"
 #include "ActionBarWidget.h"
 #include "AllyDotWidget.h"
 #include "FloatingBarWidget.h"
