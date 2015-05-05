@@ -58,7 +58,7 @@ public:
 	static void SpawnAtActor(UObject* worldContextObject, AActor* targetActor, FString message, FVector offset = FVector::ZeroVector, FLinearColor textColor = FLinearColor::White);
 
 protected:
-	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
+	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
 
 private:
 	UPROPERTY() UTextBlock* messageLabel;

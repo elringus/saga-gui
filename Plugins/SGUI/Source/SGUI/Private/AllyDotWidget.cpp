@@ -17,8 +17,10 @@ void UAllyDotWidget::SetHPRatio(const float& value)
 	allyDotImage->SetColorAndOpacity(FLinearColor(1.0 - value, value, 0, allyDotImage->ColorAndOpacity.A));
 }
 
-void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
+void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
 {
+	Super::Tick_Implementation(myGeometry, deltaTime);
+
 	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
@@ -39,7 +41,7 @@ void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime
 		opacity = FMath::InterpExpoOut(allyDotImage->ColorAndOpacity.A,
 			(allyDotImage->ColorAndOpacity.G <= .01f) ? 0 :
 			FMath::Clamp((VisibleRadius - FVector::Dist(MasterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
-			inDeltaTime * VisibilityTransitionSpeed);
+			deltaTime * VisibilityTransitionSpeed);
 	}
 	else opacity = 0;
 	FLinearColor color = allyDotImage->ColorAndOpacity;

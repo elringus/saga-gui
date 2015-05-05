@@ -56,7 +56,7 @@ public:
 	void SetFillColor(FLinearColor fillColor);
 
 protected:
-	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
+	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
 
 private:
 	UPROPERTY() UProgressBar* floatingBar;

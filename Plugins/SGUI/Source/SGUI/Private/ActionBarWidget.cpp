@@ -10,10 +10,11 @@ UActionBarWidget* UActionBarWidget::Create(UObject* worldContextObject)
 	return widget;
 }
 
-UActionBarButtonWidget* UActionBarWidget::AddActionButton(UObject* worldContextObject, int32 cooldown, UTexture2D* buttonTexture)
+UActionBarButtonWidget* UActionBarWidget::AddActionButton(UObject* worldContextObject, float cooldown, UTexture2D* buttonTexture, FText tooltipTxt)
 {
-	auto button = InstantiateWidget<UActionBarButtonWidget>(worldContextObject);
+	auto button = UActionBarButtonWidget::Create(worldContextObject, cooldown);
 	if (buttonTexture) button->SetTexture(buttonTexture);
+	button->SetTooltip(tooltipTxt);
 
 	buttons.Add(button);
 

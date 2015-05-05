@@ -40,15 +40,17 @@ void UFloatingTextWidget::SpawnAtActor(UObject* worldContextObject, AActor* targ
 	GetSlot(widget->messageLabel)->SetPosition(screenPos / GetViewportScale());
 }
 
-void UFloatingTextWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
+void UFloatingTextWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
 {
+	Super::Tick_Implementation(myGeometry, deltaTime);
+
 	auto curPos = GetSlot(messageLabel)->GetPosition();
 
-	GetSlot(messageLabel)->SetPosition(curPos + FVector2D(0, -FloatingSpeed * inDeltaTime));
+	GetSlot(messageLabel)->SetPosition(curPos + FVector2D(0, -FloatingSpeed * deltaTime));
 
 	auto opacity = FMath::InterpExpoOut(messageLabel->ColorAndOpacity.GetSpecifiedColor().A,
 		FMath::Clamp(curPos.Y / (GetViewportSize().Y / 2), 0.f, 1.f),
-		inDeltaTime * FadeSpeed);
+		deltaTime * FadeSpeed);
 	auto color = messageLabel->ColorAndOpacity.GetSpecifiedColor();
 	color.A = opacity;
 	SetColor(color);

@@ -28,11 +28,12 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @param cooldown The cooldown of the action. Leave zero (default) to disable CD.
 	*  @param buttonTexture The texture to use for the action button.
+	*  @param tooltip The tooltip text to show on hover for the action button.
 	*  @return Instance of the created button.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Add Action Button",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionBar")
-	UActionBarButtonWidget* AddActionButton(UObject* worldContextObject, int32 cooldown = 0, UTexture2D* buttonTexture = nullptr);
+	UActionBarButtonWidget* AddActionButton(UObject* worldContextObject, float cooldown = 0, UTexture2D* buttonTexture = nullptr, FText tooltipTxt = FText::FromString(TEXT("")));
 
 private:
 	TArray<UActionBarButtonWidget*> buttons;

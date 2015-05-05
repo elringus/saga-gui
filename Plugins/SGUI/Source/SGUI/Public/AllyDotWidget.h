@@ -48,7 +48,7 @@ public:
 	FORCEINLINE void BindHPRatio(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
 
 protected:
-	virtual void Tick_Implementation(FGeometry myGeometry, float inDeltaTime) override;
+	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
 
 private:
 	UImage* allyDotImage;

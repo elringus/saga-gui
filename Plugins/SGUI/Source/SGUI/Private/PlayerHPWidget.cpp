@@ -17,8 +17,10 @@ void UPlayerHPWidget::SetFillAmount(const float& value)
 	hpLabel->SetText(FText::FromString(FString::Printf(TEXT("%d%%"), (uint8)(value * 100))));
 }
 
-void UPlayerHPWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
+void UPlayerHPWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
 {
+	Super::Tick_Implementation(myGeometry, deltaTime);
+
 	if (onTick.IsBound()) 
 		SetFillAmount(onTick.Execute());
 }

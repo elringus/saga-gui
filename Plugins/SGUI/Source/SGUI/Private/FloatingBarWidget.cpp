@@ -27,8 +27,10 @@ void UFloatingBarWidget::SetFillColor(FLinearColor fillColor)
 	floatingBar->SetFillColorAndOpacity(fillColor);
 }
 
-void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDeltaTime)
+void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
 {
+	Super::Tick_Implementation(myGeometry, deltaTime);
+
 	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
@@ -51,7 +53,7 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float inDelta
 		opacity = FMath::InterpExpoOut(floatingBar->FillColorAndOpacity.A,
 			(!MasterController->LineOfSightTo(followTarget) || floatingBar->Percent <= .01f) ? 0 :
 			FMath::Clamp((VisibleRadius - FVector::Dist(MasterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
-			inDeltaTime * VisibilityTransitionSpeed);
+			deltaTime * VisibilityTransitionSpeed);
 
 		SetOpacity(opacity);
 	}
