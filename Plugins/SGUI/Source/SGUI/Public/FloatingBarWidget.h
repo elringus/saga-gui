@@ -34,6 +34,13 @@ public:
 	static UFloatingBarWidget* Create(UObject* worldContextObject, AActor* followTarget, FVector offset = FVector::ZeroVector, FLinearColor fillColor = FLinearColor::Red);
 
 	/**
+	*  Sets player name that will appear with the bar.
+	*  @param value Player name text.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Player Name"), Category = "SagaGUI|FloatingBar")
+	void SetPlayerName(FText value);
+
+	/**
 	 *  Sets fill amount of the floating bar. 
 	 *  @param value Fill value. Should be in 0.0 to 1.0 range.
 	 */
@@ -59,10 +66,11 @@ protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
 
 private:
-	UPROPERTY() UProgressBar* floatingBar;
-	UPROPERTY() UTextBlock* hpLabel;
-	UPROPERTY() AActor* followTarget;
-	UPROPERTY() FVector offset;
+	class UProgressBar* floatingBar;
+	class AActor* followTarget;
+	class UTextBlock* hpLabel;
+	class UTextBlock* nameLabel;
+	FVector offset;
 
 	DECLARE_DELEGATE_RetVal(float, FOnTick)
 	FOnTick onTick;

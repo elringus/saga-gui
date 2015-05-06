@@ -9,6 +9,8 @@
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "Runtime/UMG/Public/Blueprint/WidgetLayoutLibrary.h"
 
+#include "Runtime/Engine/Public/Slate/SlateGameResources.h"
+
 #include "Runtime/Engine/Classes/Engine/UserInterfaceSettings.h"
 #include "Runtime/Engine/Classes/Engine/RendererSettings.h"
 

@@ -10,10 +10,16 @@ UFloatingBarWidget* UFloatingBarWidget::Create(UObject* worldContextObject, AAct
 	widget->floatingBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("FloatingBar")));
 	widget->SetFillColor(fillColor);
 	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));
+	widget->nameLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("NameLabel")));
 
 	widget->SetOpacity(0);
 
 	return widget;
+}
+
+void UFloatingBarWidget::SetPlayerName(FText value)
+{
+	nameLabel->SetText(value);
 }
 
 void UFloatingBarWidget::SetFillAmount(const float& value)
@@ -34,7 +40,7 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTi
 	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
-	auto pivotCorrection = FVector2D(GetSlot(floatingBar)->GetSize().X / 2, 0) * GetViewportScale();
+	auto pivotCorrection = FVector2D(100, 0) * GetViewportScale();
 	if (SetPositionFromWorld(targetLocation, pivotCorrection))
 	{
 		floatingBar->SetVisibility(ESlateVisibility::Visible);
@@ -74,7 +80,9 @@ void UFloatingBarWidget::SetOpacity(float opacity)
 	color = hpLabel->ColorAndOpacity.GetSpecifiedColor();
 	color.A = opacity;
 	hpLabel->SetColorAndOpacity(color);
+	nameLabel->SetColorAndOpacity(color);
 	color = hpLabel->ShadowColorAndOpacity;
 	color.A = FMath::Clamp(color.A - .2f, 0.f, 1.f);
 	hpLabel->SetShadowColorAndOpacity(color);
+	nameLabel->SetShadowColorAndOpacity(color);
 }
