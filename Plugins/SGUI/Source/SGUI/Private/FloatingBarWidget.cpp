@@ -45,11 +45,13 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTi
 	{
 		floatingBar->SetVisibility(ESlateVisibility::Visible);
 		hpLabel->SetVisibility(ESlateVisibility::Visible);
+		nameLabel->SetVisibility(ESlateVisibility::Visible);
 	}
 	else
 	{
 		floatingBar->SetVisibility(ESlateVisibility::Hidden);
 		hpLabel->SetVisibility(ESlateVisibility::Hidden);
+		nameLabel->SetVisibility(ESlateVisibility::Hidden);
 		return;
 	}
 
