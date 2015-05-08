@@ -20,6 +20,7 @@
 #include "AllyDotWidget.h"
 #include "FloatingBarWidget.h"
 #include "FloatingTextWidget.h"
+#include "FragsWidget.h"
 #include "GroupMemberWidget.h"
 #include "GroupStatusWidget.h"
 #include "InventoryWidget.h"

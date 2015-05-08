@@ -13,6 +13,7 @@ void USagaWidget::CacheWidgetClasses()
 	widgetPaths.Add(TEXT("/Game/SGUI/AllyDot/AllyDot.AllyDot_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/FloatingBar/FloatingBar.FloatingBar_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/FloatingText/FloatingText.FloatingText_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/Frags/Frags.Frags_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/GroupStatus/GroupStatus.GroupStatus_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/GroupStatus/GroupMember.GroupMember_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/Inventory/Inventory.Inventory_C"));
