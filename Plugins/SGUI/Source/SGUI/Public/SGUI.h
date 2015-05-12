@@ -25,7 +25,7 @@
 #include "GroupStatusWidget.h"
 #include "InventoryWidget.h"
 #include "PlayerAvatarWidget.h"
-#include "PlayerHPWidget.h"
+#include "PlayerStatusWidget.h"
 
 #define Print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::White, text)
 

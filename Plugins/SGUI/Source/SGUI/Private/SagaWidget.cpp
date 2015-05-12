@@ -18,7 +18,7 @@ void USagaWidget::CacheWidgetClasses()
 	widgetPaths.Add(TEXT("/Game/SGUI/GroupStatus/GroupMember.GroupMember_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/Inventory/Inventory.Inventory_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/PlayerAvatar/PlayerAvatar.PlayerAvatar_C"));
-	widgetPaths.Add(TEXT("/Game/SGUI/PlayerHP/PlayerHP.PlayerHP_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/PlayerStatus/PlayerStatus.PlayerStatus_C"));
 
 	for (int i = 0; i < widgetPaths.Num(); i++)
 	{
