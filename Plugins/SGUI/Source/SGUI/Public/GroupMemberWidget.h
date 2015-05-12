@@ -22,10 +22,18 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Group Member HP"), Category = "SagaGUI|GroupStatus")
 	void SetHPFillAmount(const float& value);
 
+	/**
+	*  Sets fill amount of the group member stamina bar.
+	*  @param value Fill value. Should be in 0.0 to 1.0 range.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Group Member Stamina"), Category = "SagaGUI|GroupStatus")
+	void SetStaminaFillAmount(const float& value);
+
 private:
 	static UGroupMemberWidget* Create(UObject* worldContextObject, FText memberName);
 
+	class UTextBlock* nameLabel;
 	class UProgressBar* hpBar;
 	class UTextBlock* hpLabel;
-	class UTextBlock* nameLabel;
+	class UProgressBar* staminaBar;
 };

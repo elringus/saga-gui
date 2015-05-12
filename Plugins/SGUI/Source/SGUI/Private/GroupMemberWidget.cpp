@@ -5,9 +5,10 @@ UGroupMemberWidget* UGroupMemberWidget::Create(UObject* worldContextObject, FTex
 {
 	auto widget = InstantiateWidget<UGroupMemberWidget>(worldContextObject);
 
+	widget->nameLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("NameLabel")));
 	widget->hpBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("HPBar")));
 	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));
-	widget->nameLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("NameLabel")));
+	widget->staminaBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("StaminaBar")));
 
 	widget->nameLabel->SetText(memberName);
 
@@ -18,4 +19,9 @@ void UGroupMemberWidget::SetHPFillAmount(const float& value)
 {
 	hpBar->SetPercent(value);
 	hpLabel->SetText(FText::FromString(FString::Printf(TEXT("%d%%"), (uint8)(value * 100))));
+}
+
+void UGroupMemberWidget::SetStaminaFillAmount(const float& value)
+{
+	staminaBar->SetPercent(value);
 }
