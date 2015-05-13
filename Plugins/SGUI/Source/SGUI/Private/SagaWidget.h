@@ -15,7 +15,7 @@ protected:
 	class APlayerController* MasterController;
 	
 	template<typename WidgetType>
-	static WidgetType* InstantiateWidget(UObject* worldContextObject = nullptr)
+	static WidgetType* InstantiateWidget(UObject* worldContextObject = nullptr, int32 zOrder = 0)
 	{
 		CacheWidgetClasses();
 
@@ -27,7 +27,7 @@ protected:
 
 		auto widget = CreateWidget<USagaWidget>(masterController, *widgetClass);
 
-		widget->AddToViewport();
+		widget->AddToViewport(zOrder);
 		widget->MasterController = masterController;
 
 		return Cast<WidgetType>(widget);

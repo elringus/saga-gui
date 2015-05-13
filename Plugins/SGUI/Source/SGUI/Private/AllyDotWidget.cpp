@@ -3,7 +3,7 @@
 
 UAllyDotWidget* UAllyDotWidget::Create(UObject* worldContextObject, AActor* followTarget, FVector offset)
 {
-	auto widget = InstantiateWidget<UAllyDotWidget>(worldContextObject);
+	auto widget = InstantiateWidget<UAllyDotWidget>(worldContextObject, -100);
 	widget->followTarget = followTarget;
 	widget->offset = offset;
 

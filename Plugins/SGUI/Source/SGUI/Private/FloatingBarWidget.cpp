@@ -3,7 +3,7 @@
 
 UFloatingBarWidget* UFloatingBarWidget::Create(UObject* worldContextObject, AActor* followTarget, FVector offset, FLinearColor fillColor)
 {
-	auto widget = InstantiateWidget<UFloatingBarWidget>(worldContextObject);
+	auto widget = InstantiateWidget<UFloatingBarWidget>(worldContextObject, -100);
 	widget->followTarget = followTarget;
 	widget->offset = offset;
 
