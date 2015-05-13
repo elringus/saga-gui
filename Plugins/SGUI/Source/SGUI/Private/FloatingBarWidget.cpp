@@ -41,8 +41,7 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTi
 	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
-	auto pivotCorrection = FVector2D(GetSlot(floatingPanel)->GetSize().X / 2, 0) * GetViewportScale();
-	if (SetPositionFromWorld(targetLocation, pivotCorrection, GetSlot(floatingPanel)))
+	if (SetPositionFromWorld(targetLocation, GetSlot(floatingPanel)))
 	{
 		floatingBar->SetVisibility(ESlateVisibility::Visible);
 		hpLabel->SetVisibility(ESlateVisibility::Visible);

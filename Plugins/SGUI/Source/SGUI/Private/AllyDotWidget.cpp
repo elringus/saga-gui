@@ -24,8 +24,7 @@ void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
 	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
-	auto pivotCorrection = FVector2D(GetSlot(allyDotImage)->GetSize().X / 2, 0) * GetViewportScale();
-	if (SetPositionFromWorld(targetLocation, pivotCorrection, GetSlot(allyDotImage)))
+	if (SetPositionFromWorld(targetLocation, GetSlot(allyDotImage)))
 	{
 		allyDotImage->SetVisibility(ESlateVisibility::Visible);
 	}

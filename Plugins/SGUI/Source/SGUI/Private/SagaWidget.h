@@ -40,7 +40,7 @@ protected:
 	FORCEINLINE static float GetQualityScale() { Scalability::FQualityLevels scalabilityQuality = Scalability::GetQualityLevels(); return scalabilityQuality.ResolutionQuality / 100.0f; }
 	FORCEINLINE static FVector2D GetViewportCenter() { return (GetViewportSize() / GetViewportScale()) / 2; }
 
-	FORCEINLINE bool SetPositionFromWorld(FVector worldPosition, FVector2D pivotCorrection = FVector2D::ZeroVector, UCanvasPanelSlot* slot = nullptr)
+	FORCEINLINE bool SetPositionFromWorld(FVector worldPosition, UCanvasPanelSlot* slot = nullptr, FVector2D pivotCorrection = FVector2D::ZeroVector)
 	{ 
 		FVector2D screenPos;
 		bool isInViewport;
