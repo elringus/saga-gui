@@ -38,7 +38,7 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTi
 {
 	Super::Tick_Implementation(myGeometry, deltaTime);
 
-	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
+	if (!MasterController || !followTarget || followTarget->IsPendingKillPending()) { RemoveFromViewport(); return; }
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
 	if (SetPositionFromWorld(targetLocation, GetSlot(floatingPanel)))
@@ -57,7 +57,7 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTi
 
 	if (MasterController->GetPawn())
 	{
-		float opacity; 
+		float opacity;
 		opacity = FMath::InterpExpoOut(floatingBar->FillColorAndOpacity.A,
 			(!MasterController->LineOfSightTo(followTarget) || floatingBar->Percent <= .01f) ? 0 :
 			FMath::Clamp((VisibleRadius - FVector::Dist(MasterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),

@@ -11,9 +11,18 @@ class SGUI_API USagaWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
+public:
+	/**
+	*  Removes all the widgets from the viewport and destroys them.
+	*  @param worldContextObject Any UObject to get world context from.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Destroy All Widgets",
+		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI")
+	static void DestroyAllWidgets(UObject* worldContextObject);
+
 protected:
 	class APlayerController* MasterController;
-	
+
 	template<typename WidgetType>
 	static WidgetType* InstantiateWidget(UObject* worldContextObject = nullptr, int32 zOrder = 0)
 	{

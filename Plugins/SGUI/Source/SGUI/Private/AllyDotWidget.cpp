@@ -21,7 +21,7 @@ void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
 {
 	Super::Tick_Implementation(myGeometry, deltaTime);
 
-	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
+	if (!MasterController || !followTarget || followTarget->IsPendingKillPending()) { RemoveFromViewport(); return; }
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
 	if (SetPositionFromWorld(targetLocation, GetSlot(allyDotImage)))

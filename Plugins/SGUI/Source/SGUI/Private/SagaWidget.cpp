@@ -3,6 +3,12 @@
 
 TArray<UClass*> USagaWidget::widgetClassesCache;
 
+void USagaWidget::DestroyAllWidgets(UObject* worldContextObject)
+{
+	worldContextObject->GetWorld()->GetGameViewport()->RemoveAllViewportWidgets();
+	widgetClassesCache.Empty();
+}
+
 void USagaWidget::CacheWidgetClasses()
 {
 	if (widgetClassesCache.Num() > 0) return;
