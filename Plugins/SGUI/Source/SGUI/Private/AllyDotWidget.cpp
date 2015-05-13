@@ -25,7 +25,7 @@ void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
 	auto pivotCorrection = FVector2D(GetSlot(allyDotImage)->GetSize().X / 2, 0) * GetViewportScale();
-	if (SetPositionFromWorld(targetLocation, pivotCorrection))
+	if (SetPositionFromWorld(targetLocation, pivotCorrection, GetSlot(allyDotImage)))
 	{
 		allyDotImage->SetVisibility(ESlateVisibility::Visible);
 	}

@@ -7,6 +7,7 @@ UFloatingBarWidget* UFloatingBarWidget::Create(UObject* worldContextObject, AAct
 	widget->followTarget = followTarget;
 	widget->offset = offset;
 
+	widget->floatingPanel = Cast<UCanvasPanel>(widget->GetWidgetFromName(TEXT("FloatingPanel")));
 	widget->floatingBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("FloatingBar")));
 	widget->SetFillColor(fillColor);
 	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));
@@ -40,8 +41,8 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTi
 	if (!MasterController || !followTarget || followTarget->IsPendingKill()) RemoveFromViewport();
 
 	FVector targetLocation = followTarget->GetActorLocation() + offset;
-	auto pivotCorrection = FVector2D(100, 0) * GetViewportScale();
-	if (SetPositionFromWorld(targetLocation, pivotCorrection))
+	auto pivotCorrection = FVector2D(GetSlot(floatingPanel)->GetSize().X / 2, 0) * GetViewportScale();
+	if (SetPositionFromWorld(targetLocation, pivotCorrection, GetSlot(floatingPanel)))
 	{
 		floatingBar->SetVisibility(ESlateVisibility::Visible);
 		hpLabel->SetVisibility(ESlateVisibility::Visible);

@@ -66,6 +66,7 @@ protected:
 	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
 
 private:
+	class UCanvasPanel* floatingPanel;
 	class UProgressBar* floatingBar;
 	class AActor* followTarget;
 	class UTextBlock* hpLabel;
