@@ -15,6 +15,7 @@
 #include "Runtime/Engine/Classes/Engine/RendererSettings.h"
 
 #include "SagaWidget.h"
+#include "SagaButtonWidget.h"
 #include "ActionBarButtonWidget.h"
 #include "ActionBarWidget.h"
 #include "ActionTableWidget.h"

@@ -16,6 +16,7 @@ void USagaWidget::CacheWidgetClasses()
 	TArray<FString> widgetPaths;
 	widgetPaths.Add(TEXT("/Game/SGUI/ActionBar/ActionBarButton.ActionBarButton_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/ActionBar/ActionBar.ActionBar_C"));
+	widgetPaths.Add(TEXT("/Game/SGUI/ActionTable/ActionTable.ActionTable_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/AllyDot/AllyDot.AllyDot_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/FloatingBar/FloatingBar.FloatingBar_C"));
 	widgetPaths.Add(TEXT("/Game/SGUI/FloatingText/FloatingText.FloatingText_C"));

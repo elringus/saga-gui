@@ -28,7 +28,7 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @param cooldown The cooldown of the action. Leave zero (default) to disable CD.
 	*  @param buttonTexture The texture to use for the action button.
-	*  @param tooltip The tooltip text to show on hover for the action button.
+	*  @param tooltipTxt The tooltip text to show on hover for the action button.
 	*  @return Instance of the created button.
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Add Action Button",
