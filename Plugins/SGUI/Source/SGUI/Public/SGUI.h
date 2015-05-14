@@ -17,6 +17,7 @@
 #include "SagaWidget.h"
 #include "ActionBarButtonWidget.h"
 #include "ActionBarWidget.h"
+#include "ActionTableWidget.h"
 #include "AllyDotWidget.h"
 #include "FloatingBarWidget.h"
 #include "FloatingTextWidget.h"
@@ -37,15 +38,20 @@ DECLARE_LOG_CATEGORY_EXTERN(SagaGUI, Log, All);
 *  Should be passed in case of multi-world environments.
 *  @return Pointer to the found player controller.
 */
-FORCEINLINE APlayerController* GetPlayerController(UObject* worldContextObject = nullptr)
+FORCEINLINE APlayerController* GetPlayerController(UObject* worldContextObject)
 {
 	if (worldContextObject) 
 		return UGameplayStatics::GetPlayerController(worldContextObject, 0);
+	else 
+	{
+		UE_LOG(SagaGUI, Fatal, TEXT("GetPlayerController(): Can't get player controller, worldContextObject is nullptr."));
+		return nullptr;
+	}
 
 	// Works only for single-world cases. Not usable for multiplayer projects.
-	for (TObjectIterator<APlayerController> pc; pc; ++pc)
-		if (pc->bActorInitialized) return *pc;
-	return nullptr;
+	//for (TObjectIterator<APlayerController> pc; pc; ++pc)
+	//	if (pc->bActorInitialized) return *pc;
+	//return nullptr;
 
 	// Hack for multiworld cases. Causes terrible freeze on first use. 
 	// Should be avoided by using auto self refs in BP.
