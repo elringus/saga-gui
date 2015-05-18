@@ -24,11 +24,16 @@ protected:
 	class APlayerController* MasterController;
 
 	template<typename WidgetType>
-	static WidgetType* InstantiateWidget(UObject* worldContextObject = nullptr, int32 zOrder = 0)
+	static WidgetType* InstantiateWidget(UObject* worldContextObject, int32 zOrder = 0)
 	{
 		CacheWidgetClasses();
 
-		auto widgetClass = widgetClassesCache.FindByPredicate([](UClass* wc){ return Cast<WidgetType>(wc->GetDefaultObject()); });
+		auto widgetClass = widgetClassesCache.FindByPredicate([&worldContextObject](UClass* wc){ 
+			// Workaround for a bug, when cached pointers becomes null. 
+			// Should not be required, when Epic will fix the static UMG refs bug.
+			if (!wc) { DestroyAllWidgets(worldContextObject); CacheWidgetClasses(); }
+			return Cast<WidgetType>(wc->GetDefaultObject()); 
+		});
 		if (!widgetClass) UE_LOG(SagaGUI, Fatal, TEXT("InstantiateWidget(): Can't find widget class in the cache."));
 
 		auto masterController = GetPlayerController(worldContextObject);
