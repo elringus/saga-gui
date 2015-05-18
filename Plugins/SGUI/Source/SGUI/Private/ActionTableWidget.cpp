@@ -28,8 +28,8 @@ USagaButtonWidget* UActionTableWidget::AddButton(UObject* worldContextObject, UT
 	auto buttonWidget = CreateWidget<UUserWidget>(worldContextObject->GetWorld(), ButtonTemplate);
 	buttonWidget->AddToViewport();
 
-	auto button = Cast<USagaButtonWidget>(buttonWidget->GetWidgetFromName(TEXT("Button")));
-	button->InitializeButton(Cast<UButton>(button));
+	auto button = Cast<USagaButtonWidget>(buttonWidget);
+	button->InitializeButton(Cast<UButton>(buttonWidget->GetWidgetFromName(TEXT("Button"))));
 	if (buttonTexture) button->SetTexture(buttonTexture);
 	button->SetTooltip(tooltipTxt);
 
