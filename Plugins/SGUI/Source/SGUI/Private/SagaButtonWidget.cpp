@@ -15,20 +15,17 @@ void USagaButtonWidget::DoClick()
 
 void USagaButtonWidget::SetTexture(UTexture2D* texture)
 {
-	//const auto size = FVector2D(texture->GetSizeX(), texture->GetSizeY());
-	//auto path = texture->GetPathName();
-	//path.Split(TEXT("."), &path, nullptr);
-	//path.Append(TEXT(".png"));
+	button->WidgetStyle.Normal.SetResourceObject(texture);
+	button->WidgetStyle.Normal.ImageSize = FVector2D(texture->GetSizeX(), texture->GetSizeY());
 
-	//auto sagaGUIResources = FSlateGameResources::New(FName("SagaGUIResources"), "/Game/SGUI/ActionBar/Textures", "/Game/SGUI/ActionBar/Textures");
-	//FSlateStyleRegistry::RegisterSlateStyle(sagaGUIResources.Get());
+	button->WidgetStyle.Hovered.SetResourceObject(texture);
+	button->WidgetStyle.Hovered.ImageSize = FVector2D(texture->GetSizeX(), texture->GetSizeY());
 
-	//FSlateImageBrush brush = FSlateImageBrush(*sagaGUIResources.Get().GetDynamicImageBrush(FName("DefaultButton")));
-	//brush.ImageSize = FVector2D(texture->GetSizeX(), texture->GetSizeY());
-	//actionButton->WidgetStyle.SetNormal(brush);
-	//actionButton->WidgetStyle.Hovered.SetResourceObject(texture);
-	//actionButton->WidgetStyle.Pressed.SetResourceObject(texture);
-	//actionButton->WidgetStyle.Disabled.SetResourceObject(texture);
+	button->WidgetStyle.Pressed.SetResourceObject(texture);
+	button->WidgetStyle.Pressed.ImageSize = FVector2D(texture->GetSizeX(), texture->GetSizeY());
+
+	button->WidgetStyle.Disabled.SetResourceObject(texture);
+	button->WidgetStyle.Disabled.ImageSize = FVector2D(texture->GetSizeX(), texture->GetSizeY());
 }
 
 void USagaButtonWidget::SetTooltip(FText text)
