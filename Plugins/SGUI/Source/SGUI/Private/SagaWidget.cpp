@@ -11,7 +11,10 @@ void USagaWidget::DestroyAllWidgets(UObject* worldContextObject)
 
 void USagaWidget::CacheWidgetClasses()
 {
-	if (widgetClassesCache.Num() > 0) return;
+	// It seems GC cleans the cache while in build.
+	// So disabling it and waiting for Epic to fix the static UMG refs bug.
+	//if (widgetClassesCache.Num() > 0) return;
+	widgetClassesCache.Empty();
 
 	TArray<FString> widgetPaths;
 	widgetPaths.Add(TEXT("/Game/SGUI/ActionBar/ActionBarButton.ActionBarButton_C"));
