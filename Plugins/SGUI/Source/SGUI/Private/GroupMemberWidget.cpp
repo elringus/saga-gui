@@ -4,6 +4,7 @@
 UGroupMemberWidget* UGroupMemberWidget::Create(UObject* worldContextObject, FText memberName)
 {
 	auto widget = InstantiateWidget<UGroupMemberWidget>(worldContextObject);
+	if (!widget) return nullptr;
 
 	widget->nameLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("NameLabel")));
 	widget->hpBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("HPBar")));

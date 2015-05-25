@@ -4,6 +4,8 @@
 UAllyDotWidget* UAllyDotWidget::Create(UObject* worldContextObject, AActor* followTarget, FVector offset)
 {
 	auto widget = InstantiateWidget<UAllyDotWidget>(worldContextObject, -100);
+	if (!widget) return nullptr;
+
 	widget->followTarget = followTarget;
 	widget->offset = offset;
 

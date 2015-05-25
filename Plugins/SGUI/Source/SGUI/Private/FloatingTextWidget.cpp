@@ -4,6 +4,8 @@
 UFloatingTextWidget* UFloatingTextWidget::Create(UObject* worldContextObject, FString message, FLinearColor textColor)
 {
 	auto widget = InstantiateWidget<UFloatingTextWidget>(worldContextObject);
+	if (!widget) return nullptr;
+
 	widget->messageLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("MessageLabel")));
 	widget->messageLabel->SetText(FText::FromString(message));
 	widget->SetColor(textColor);
@@ -16,6 +18,7 @@ void UFloatingTextWidget::Spawn(UObject* worldContextObject, FString message, FL
 	if (!IsGameRunning(worldContextObject)) return;
 
 	auto widget = Create(worldContextObject, message, textColor);
+	if (!widget) return;
 
 	GetSlot(widget->messageLabel)->SetPosition(GetViewportCenter());
 }
@@ -25,6 +28,7 @@ void UFloatingTextWidget::SpawnAtPosition(UObject* worldContextObject, FVector2D
 	if (!IsGameRunning(worldContextObject)) return;
 
 	auto widget = Create(worldContextObject, message, textColor);
+	if (!widget) return;
 
 	GetSlot(widget->messageLabel)->SetPosition(screenPosition / GetViewportScale());
 }
@@ -34,6 +38,7 @@ void UFloatingTextWidget::SpawnAtActor(UObject* worldContextObject, AActor* targ
 	if (!IsGameRunning(worldContextObject)) return;
 
 	auto widget = Create(worldContextObject, message, textColor);
+	if (!widget) return;
 
 	FVector2D screenPos;
 	widget->MasterController->ProjectWorldLocationToScreen(targetActor->GetActorLocation() + offset, screenPos);

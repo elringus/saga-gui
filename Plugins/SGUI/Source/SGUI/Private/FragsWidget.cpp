@@ -4,6 +4,7 @@
 UFragsWidget* UFragsWidget::Create(UObject* worldContextObject)
 {
 	auto widget = InstantiateWidget<UFragsWidget>(worldContextObject);
+	if (!widget) return nullptr;
 
 	widget->fragsLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("FragsLabel")));
 

@@ -4,6 +4,7 @@
 UPlayerStatusWidget* UPlayerStatusWidget::Create(UObject* worldContextObject)
 {
 	auto widget = InstantiateWidget<UPlayerStatusWidget>(worldContextObject);
+	if (!widget) return nullptr;
 
 	widget->hpBar = Cast<UProgressBar>(widget->GetWidgetFromName(TEXT("HPBar")));
 	widget->hpLabel = Cast<UTextBlock>(widget->GetWidgetFromName(TEXT("HPLabel")));

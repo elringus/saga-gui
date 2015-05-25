@@ -4,6 +4,7 @@
 UActionTableWidget* UActionTableWidget::Create(UObject* worldContextObject)
 {
 	auto widget = InstantiateWidget<UActionTableWidget>(worldContextObject);
+	if (!widget) return nullptr;
 
 	widget->actionGrid = Cast<UGridPanel>(widget->GetWidgetFromName(TEXT("ActionGrid")));
 

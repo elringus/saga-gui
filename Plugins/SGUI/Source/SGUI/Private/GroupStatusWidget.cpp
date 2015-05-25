@@ -4,6 +4,7 @@
 UGroupStatusWidget* UGroupStatusWidget::Create(UObject* worldContextObject)
 {
 	auto widget = InstantiateWidget<UGroupStatusWidget>(worldContextObject);
+	if (!widget) return nullptr;
 
 	widget->groupWindowVertical = Cast<UVerticalBox>(widget->GetWidgetFromName(TEXT("GroupWindowVertical")));
 

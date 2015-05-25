@@ -4,6 +4,7 @@
 UActionBarWidget* UActionBarWidget::Create(UObject* worldContextObject)
 {
 	auto widget = InstantiateWidget<UActionBarWidget>(worldContextObject);
+	if (!widget) return nullptr;
 
 	widget->actionBarHorizontal = Cast<UHorizontalBox>(widget->GetWidgetFromName(TEXT("ActionBarHorizontal")));
 

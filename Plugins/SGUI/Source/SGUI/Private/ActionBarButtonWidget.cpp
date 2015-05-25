@@ -4,6 +4,8 @@
 UActionBarButtonWidget* UActionBarButtonWidget::Create(UObject* worldContextObject, float cooldown)
 {
 	auto widget = InstantiateWidget<UActionBarButtonWidget>(worldContextObject);
+	if (!widget) return nullptr;
+
 	widget->cd = cooldown;
 
 	widget->InitializeButton(Cast<UButton>(widget->GetWidgetFromName(TEXT("ActionButton"))));
