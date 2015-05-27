@@ -15,7 +15,7 @@ class SGUI_API UFloatingBarWidget : public USagaWidget
 public:
 	/* Hide the widget, when distane between follow target and the master controller is more than this value. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
-	float VisibleRadius = 1500.f;
+	float VisibleRadius = 2500.f;
 
 	/* Speed of revealing\hiding the widget, controlled by visible radius. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
@@ -25,13 +25,16 @@ public:
 	 *  Creates a floating bar widget and adds it to the viewport.
 	 *  @param worldContextObject Any UObject to get world context from.
 	 *  @param followTarget An actor, which the widget will allign itsels with.
+	 *  @param lookPoint An actor, which position will be used to determine 
+	 *	  if the followTarget is in LOS and ROS. PlayerController->GetPawn() is used by default.
 	 *  @param offset Offset to the follow target location in world space.
 	 *  @param barColor Fill color of the bar.
 	 *  @return Instance of the created widget.
 	 */
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Floating Bar", 
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|FloatingBar")
-	static UFloatingBarWidget* Create(UObject* worldContextObject, AActor* followTarget, FVector offset = FVector::ZeroVector, FLinearColor fillColor = FLinearColor::Red);
+	static UFloatingBarWidget* Create(UObject* worldContextObject, AActor* followTarget, AActor* lookPoint = nullptr, 
+										FVector offset = FVector::ZeroVector, FLinearColor fillColor = FLinearColor::Red);
 
 	/**
 	*  Sets player name that will appear with the bar.
@@ -50,7 +53,7 @@ public:
 	/**
 	*  Binds fill amount of the progress bar.
 	*  @param functor The lambda expression, which will be called on every tick to update fill value. 
-	*  Should return float and take no parameters.
+	*    Should return float and take no parameters.
 	*/
 	template<typename FunctorType>
 	void BindFillAmount(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
@@ -69,6 +72,7 @@ private:
 	class UCanvasPanel* floatingPanel;
 	class UProgressBar* floatingBar;
 	class AActor* followTarget;
+	class AActor* lookPoint;
 	class UTextBlock* hpLabel;
 	class UTextBlock* nameLabel;
 	FVector offset;

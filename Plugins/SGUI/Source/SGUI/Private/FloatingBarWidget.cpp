@@ -1,12 +1,13 @@
 #include "SGUI.h"
 #include "FloatingBarWidget.h"
 
-UFloatingBarWidget* UFloatingBarWidget::Create(UObject* worldContextObject, AActor* followTarget, FVector offset, FLinearColor fillColor)
+UFloatingBarWidget* UFloatingBarWidget::Create(UObject* worldContextObject, AActor* followTarget, AActor* lookPoint, FVector offset, FLinearColor fillColor)
 {
 	auto widget = InstantiateWidget<UFloatingBarWidget>(worldContextObject, -100);
 	if (!widget) return nullptr;
 
 	widget->followTarget = followTarget;
+	widget->lookPoint = lookPoint;
 	widget->offset = offset;
 
 	widget->floatingPanel = Cast<UCanvasPanel>(widget->GetWidgetFromName(TEXT("FloatingPanel")));
@@ -61,8 +62,9 @@ void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTi
 	{
 		float opacity;
 		opacity = FMath::InterpExpoOut(floatingBar->FillColorAndOpacity.A,
-			(!MasterController->LineOfSightTo(followTarget) || floatingBar->Percent <= .01f) ? 0 :
-			FMath::Clamp((VisibleRadius - FVector::Dist(MasterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
+			(!MasterController->LineOfSightTo(followTarget, lookPoint ? lookPoint->GetActorLocation() : FVector::ZeroVector) || floatingBar->Percent <= .01f) ? 0 
+			: FMath::Clamp((VisibleRadius - FVector::Dist(lookPoint ? lookPoint->GetActorLocation() 
+			: MasterController->GetPawn()->GetActorLocation(), followTarget->GetActorLocation())) / VisibleRadius, 0.f, 1.f),
 			deltaTime * VisibilityTransitionSpeed);
 
 		SetOpacity(opacity);
