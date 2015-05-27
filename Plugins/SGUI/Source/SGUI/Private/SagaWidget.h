@@ -26,7 +26,11 @@ protected:
 	template<typename WidgetType>
 	static WidgetType* InstantiateWidget(UObject* worldContextObject, int32 zOrder = 0)
 	{
-		if (worldContextObject->GetWorld()->IsServer()) { UE_LOG(SagaGUI, Error, TEXT("InstantiateWidget(): Called as server. Aborting widget creation.")); return nullptr; }
+		if (!worldContextObject->GetWorld()->IsPlayInEditor() && worldContextObject->GetWorld()->IsServer()) 
+		{ 
+			UE_LOG(SagaGUI, Error, TEXT("InstantiateWidget(): Called as server. Aborting widget creation.")); 
+			return nullptr; 
+		}
 
 		CacheWidgetClasses();
 

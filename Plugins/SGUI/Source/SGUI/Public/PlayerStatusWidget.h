@@ -39,7 +39,7 @@ public:
 	/**
 	*  Binds fill amount of the hp progress bar.
 	*  @param functor The lambda expression, which will be called on every tick to update fill value.
-	*  Should return float and take no parameters.
+	*    Should return float and take no parameters.
 	*/
 	template<typename FunctorType>
 	FORCEINLINE void BindHPFillAmount(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }

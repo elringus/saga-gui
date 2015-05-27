@@ -42,7 +42,7 @@ public:
 	/**
 	*  Binds red-to-green ratio for tint color of the ally dot image.
 	*  @param functor The lambda expression, which will be called on every tick to update the ratio.
-	*  Should return float and take no parameters.
+	*    Should return float and take no parameters.
 	*/
 	template<typename FunctorType>
 	FORCEINLINE void BindHPRatio(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
