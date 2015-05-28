@@ -62,6 +62,8 @@ protected:
 
 	FORCEINLINE bool SetPositionFromWorld(FVector worldPosition, UCanvasPanelSlot* slot = nullptr, FVector2D pivotCorrection = FVector2D::ZeroVector)
 	{ 
+		if (!MasterController) return false;
+
 		FVector2D screenPos;
 		bool isInViewport;
 		isInViewport = MasterController->ProjectWorldLocationToScreen(worldPosition, screenPos);
