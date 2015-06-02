@@ -14,6 +14,8 @@ class SGUI_API USagaButtonWidget : public USagaWidget
 	GENERATED_BODY()
 
 public:
+	void InitializeButton(UButton* button);
+
 	/**
 	*  Event fires when user clicks the button.
 	*/
@@ -39,8 +41,6 @@ public:
 	*/
 	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Button Tooltip"), Category = "SagaGUI")
 	void SetTooltip(FText text);
-
-	void InitializeButton(UButton* button);
 
 protected:
 	class UButton* button;

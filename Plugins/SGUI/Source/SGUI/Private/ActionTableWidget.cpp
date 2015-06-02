@@ -41,3 +41,18 @@ USagaButtonWidget* UActionTableWidget::AddButton(UObject* worldContextObject, UT
 	return button;
 }
 
+USagaTextBoxWidget* UActionTableWidget::AddTextBox(UObject* worldContextObject, FText text, int32 column, int32 row)
+{
+	auto textBoxWidget = CreateWidget<UUserWidget>(worldContextObject->GetWorld(), TextBoxTemplate);
+	textBoxWidget->AddToViewport();
+
+	auto textBox = Cast<USagaTextBoxWidget>(textBoxWidget);
+	textBox->InitializeTextBox(Cast<UEditableTextBox>(textBoxWidget->GetWidgetFromName(TEXT("TextBox"))));
+	textBox->SetText(text);
+
+	auto slot = actionGrid->AddChildToGrid(textBox);
+	slot->SetColumn(column);
+	slot->SetRow(row);
+
+	return textBox;
+}

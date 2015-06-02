@@ -34,7 +34,7 @@ protected:
 
 		CacheWidgetClasses();
 
-		auto widgetClass = widgetClassesCache.FindByPredicate([&worldContextObject](UClass* wc)->WidgetType*{
+		auto widgetClass = widgetClassesCache.FindByPredicate([](UClass* wc)->WidgetType*{
 			// Workaround for a bug, when cached pointers becomes null. 
 			// Should not be required, when Epic will fix the static UMG refs bug.
 			if (!wc) { UE_LOG(SagaGUI, Error, TEXT("InstantiateWidget(): Cached pointers are null. Aborting widget creation.")); return nullptr; }

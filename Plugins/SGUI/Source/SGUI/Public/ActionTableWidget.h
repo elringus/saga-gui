@@ -21,6 +21,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
 	TSubclassOf<UUserWidget> ButtonTemplate;
 
+	/* Prototype for the text boxes created on AddTextBox() calls. */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SagaGUI")
+	TSubclassOf<UUserWidget> TextBoxTemplate;
+
 	/**
 	*  Creates action table widget and adds it to the viewport.
 	*  @param worldContextObject Any UObject to get world context from.
@@ -55,6 +59,19 @@ public:
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionTable")
 	USagaButtonWidget* AddButton(UObject* worldContextObject, UTexture2D* buttonTexture = nullptr, 
 									FText tooltipTxt = FText::FromString(TEXT("")), int32 column = 0, int32 row = 0);
+
+	/**
+	*  Adds a text box to the table.
+	*  You may use the returned UTextBoxWidget instance to set and get text.
+	*  @param worldContextObject Any UObject to get world context from.
+	*  @param text The initial text to set for the text box.
+	*  @param column ID of the column where text box will be kept.
+	*  @param row ID of the row where text box will be kept.
+	*  @return Instance of the created text box.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Add Text Box",
+		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionTable")
+	USagaTextBoxWidget* AddTextBox(UObject* worldContextObject, FText text = FText::FromString(TEXT("")), int32 column = 0, int32 row = 0);
 
 private:
 	class UGridPanel* actionGrid;

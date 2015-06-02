@@ -16,6 +16,7 @@
 
 #include "SagaWidget.h"
 #include "SagaButtonWidget.h"
+#include "SagaTextBoxWidget.h"
 #include "ActionBarButtonWidget.h"
 #include "ActionBarWidget.h"
 #include "ActionTableWidget.h"
