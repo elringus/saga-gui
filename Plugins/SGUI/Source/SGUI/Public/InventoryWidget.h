@@ -18,7 +18,7 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Inventory Window", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Inventory Window",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|Inventory")
 	static UInventoryWidget* Create(UObject* worldContextObject);
 	

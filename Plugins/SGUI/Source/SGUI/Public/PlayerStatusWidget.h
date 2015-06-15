@@ -18,7 +18,7 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Player Status", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Player Status",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|PlayerStatus")
 	static UPlayerStatusWidget* Create(UObject* worldContextObject);
 
@@ -26,14 +26,14 @@ public:
 	*  Sets fill amount of the player hp bar.
 	*  @param value Fill value. Should be in 0.0 to 1.0 range.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Player HP"), Category = "SagaGUI|PlayerStatus")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Player HP"), Category = "SagaGUI|PlayerStatus")
 	void SetHPFillAmount(const float& value);
 
 	/**
 	*  Sets fill amount of the player stamina bar.
 	*  @param value Fill value. Should be in 0.0 to 1.0 range.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Player Stamina"), Category = "SagaGUI|PlayerStatus")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Player Stamina"), Category = "SagaGUI|PlayerStatus")
 	void SetStaminaFillAmount(const float& value);
 
 	/**
@@ -45,7 +45,7 @@ public:
 	FORCEINLINE void BindHPFillAmount(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
 
 protected:
-	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
+	virtual void NativeTick(const FGeometry& myGeometry, float deltaTime) override;
 
 private:
 	UProgressBar* hpBar;

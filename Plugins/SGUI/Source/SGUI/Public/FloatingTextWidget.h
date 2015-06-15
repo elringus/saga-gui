@@ -30,7 +30,7 @@ public:
 	*  @param message Message to show.
 	*  @param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Spawn Floating Text Message",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|FloatingText")
 	static void Spawn(UObject* worldContextObject, FString message, FLinearColor textColor = FLinearColor::White);
 
@@ -41,7 +41,7 @@ public:
 	*  @param message Message to show.
 	*  @param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Position", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Spawn Floating Text Message At Position",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|FloatingText")
 	static void SpawnAtPosition(UObject* worldContextObject, FVector2D screenPosition, FString message, FLinearColor textColor = FLinearColor::White);
 
@@ -53,12 +53,12 @@ public:
 	*  @param offset Offset to the target actor location in world space.
 	*  @param color Text color of the message.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Spawn Floating Text Message At Actor", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Spawn Floating Text Message At Actor",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|FloatingText")
 	static void SpawnAtActor(UObject* worldContextObject, AActor* targetActor, FString message, FVector offset = FVector::ZeroVector, FLinearColor textColor = FLinearColor::White);
 
 protected:
-	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
+	virtual void NativeTick(const FGeometry& myGeometry, float deltaTime) override;
 
 private:
 	UPROPERTY() UTextBlock* messageLabel;

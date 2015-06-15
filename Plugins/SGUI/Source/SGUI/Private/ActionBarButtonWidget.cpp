@@ -14,9 +14,9 @@ UActionBarButtonWidget* UActionBarButtonWidget::Create(UObject* worldContextObje
 	return widget;
 }
 
-void UActionBarButtonWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
+void UActionBarButtonWidget::NativeTick(const FGeometry& myGeometry, float deltaTime)
 {
-	Super::Tick_Implementation(myGeometry, deltaTime);
+	Super::NativeTick(myGeometry, deltaTime);
 
 	cdTimer = cdTimer > 0.f ? cdTimer - deltaTime : 0.f;
 	if (cdTimer > 0) cdLabel->SetText(FText::FromString(FString::Printf(TEXT("%.1f"), cdTimer)));

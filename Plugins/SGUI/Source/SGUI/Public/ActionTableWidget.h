@@ -30,7 +30,7 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Action Table", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Action Table",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionTable")
 	static UActionTableWidget* Create(UObject* worldContextObject);
 
@@ -41,7 +41,7 @@ public:
 	*  @param column ID of the column where label will be kept.
 	*  @param row ID of the row where label will be kept.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Add Text Label",
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Add Text Label",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionTable")
 	void AddTextLabel(UObject* worldContextObject, FText labelText, int32 column = 0, int32 row = 0);
 
@@ -55,7 +55,7 @@ public:
 	*  @param row ID of the row where button will be kept.
 	*  @return Instance of the created button.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Add Button",
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Add Button",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionTable")
 	USagaButtonWidget* AddButton(UObject* worldContextObject, UTexture2D* buttonTexture = nullptr, 
 									FText tooltipTxt = FText::FromString(TEXT("")), int32 column = 0, int32 row = 0);
@@ -69,7 +69,7 @@ public:
 	*  @param row ID of the row where text box will be kept.
 	*  @return Instance of the created text box.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Add Text Box",
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Add Text Box",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionTable")
 	USagaTextBoxWidget* AddTextBox(UObject* worldContextObject, FText text = FText::FromString(TEXT("")), int32 column = 0, int32 row = 0);
 

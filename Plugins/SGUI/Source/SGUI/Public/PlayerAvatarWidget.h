@@ -18,7 +18,7 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Player Avatar", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Player Avatar",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|PlayerAvatar")
 	static UPlayerAvatarWidget* Create(UObject* worldContextObject);
 
@@ -26,7 +26,7 @@ public:
 	*  Sets image of the player avatar.
 	*  @param texture The texture to use with the image for player avatar.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Player Avatar Texture"), Category = "SagaGUI|PlayerAvatar")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Player Avatar Texture"), Category = "SagaGUI|PlayerAvatar")
 	void SetTexture(UTexture2D* texture);
 
 private:

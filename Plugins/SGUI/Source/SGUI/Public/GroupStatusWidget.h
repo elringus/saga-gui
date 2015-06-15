@@ -18,7 +18,7 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Group Status", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Group Status",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|GroupStatus")
 	static UGroupStatusWidget* Create(UObject* worldContextObject);
 
@@ -28,7 +28,7 @@ public:
 	*  @param memberName Name of the added group member.
 	*  @return Instance of the created button.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Add Group Member",
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Add Group Member",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|GroupStatus")
 	UGroupMemberWidget* AddGroupMember(UObject* worldContextObject, FText memberName);
 
@@ -38,7 +38,7 @@ public:
 	*  @param memberWidget Widget of the group member to remove.
 	*  @return Instance of the created button.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Remove Group Member",
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Remove Group Member",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|GroupStatus")
 	void RemoveGroupMember(UObject* worldContextObject, UGroupMemberWidget* memberWidget);
 

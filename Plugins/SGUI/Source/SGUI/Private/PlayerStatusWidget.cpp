@@ -24,9 +24,9 @@ void UPlayerStatusWidget::SetStaminaFillAmount(const float& value)
 	staminaBar->SetPercent(value);
 }
 
-void UPlayerStatusWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
+void UPlayerStatusWidget::NativeTick(const FGeometry& myGeometry, float deltaTime)
 {
-	Super::Tick_Implementation(myGeometry, deltaTime);
+	Super::NativeTick(myGeometry, deltaTime);
 
 	if (onTick.IsBound()) 
 		SetHPFillAmount(onTick.Execute());

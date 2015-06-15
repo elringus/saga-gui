@@ -45,9 +45,9 @@ void UFloatingTextWidget::SpawnAtActor(UObject* worldContextObject, AActor* targ
 	GetSlot(widget->messageLabel)->SetPosition(screenPos / GetViewportScale());
 }
 
-void UFloatingTextWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
+void UFloatingTextWidget::NativeTick(const FGeometry& myGeometry, float deltaTime)
 {
-	Super::Tick_Implementation(myGeometry, deltaTime);
+	Super::NativeTick(myGeometry, deltaTime);
 
 	auto curPos = GetSlot(messageLabel)->GetPosition();
 

@@ -16,7 +16,7 @@ public:
 	*  Removes all the widgets from the viewport and destroys them.
 	*  @param worldContextObject Any UObject to get world context from.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Destroy All Widgets",
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Destroy All Widgets",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI")
 	static void DestroyAllWidgets(UObject* worldContextObject);
 

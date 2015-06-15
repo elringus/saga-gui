@@ -6,7 +6,7 @@ Build/*
 Config/*
 Content/*
 !Content/SGUI/
-Intermediate/*
+Intermediate/
 Saved/*
 Source/*
 

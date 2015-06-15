@@ -19,9 +19,9 @@ void UAllyDotWidget::SetHPRatio(const float& value)
 	allyDotImage->SetColorAndOpacity(FLinearColor(1.0 - value, value, 0, allyDotImage->ColorAndOpacity.A));
 }
 
-void UAllyDotWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
+void UAllyDotWidget::NativeTick(const FGeometry& myGeometry, float deltaTime)
 {
-	Super::Tick_Implementation(myGeometry, deltaTime);
+	Super::NativeTick(myGeometry, deltaTime);
 
 	if (!MasterController || !followTarget || followTarget->IsPendingKillPending()) { RemoveFromViewport(); return; }
 

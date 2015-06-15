@@ -19,27 +19,27 @@ public:
 	/**
 	*  Event fires when user clicks the button.
 	*/
-	UPROPERTY(BlueprintAssignable, meta = (FriendlyName = "Event On Clicked"), Category = "SagaGUI")
+	UPROPERTY(BlueprintAssignable, meta = (DisplayName = "Event On Clicked"), Category = "SagaGUI")
 	FOnSagaButtonClicked OnSagaButtonClicked;
 
 	/**
 	*  Executes logic binded to FOnSagaButtonClicked event.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Do Click"), Category = "SagaGUI")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Do Click"), Category = "SagaGUI")
 	virtual void DoClick();
 
 	/**
 	*  Sets texture for the button.
 	*  @param texture The texture to use.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Button Texture"), Category = "SagaGUI")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Button Texture"), Category = "SagaGUI")
 	void SetTexture(UTexture2D* texture);
 
 	/**
 	*  Sets tooltip for the button to show on hover.
 	*  @param text The tooltip text.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Button Tooltip"), Category = "SagaGUI")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Button Tooltip"), Category = "SagaGUI")
 	void SetTooltip(FText text);
 
 protected:

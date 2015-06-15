@@ -37,9 +37,9 @@ void UFloatingBarWidget::SetFillColor(FLinearColor fillColor)
 	floatingBar->SetFillColorAndOpacity(fillColor);
 }
 
-void UFloatingBarWidget::Tick_Implementation(FGeometry myGeometry, float deltaTime)
+void UFloatingBarWidget::NativeTick(const FGeometry& myGeometry, float deltaTime)
 {
-	Super::Tick_Implementation(myGeometry, deltaTime);
+	Super::NativeTick(myGeometry, deltaTime);
 
 	if (!MasterController || !followTarget || followTarget->IsPendingKillPending()) { RemoveFromViewport(); return; }
 

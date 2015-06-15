@@ -18,7 +18,7 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Frags", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Frags",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|Frags")
 	static UFragsWidget* Create(UObject* worldContextObject);
 
@@ -26,7 +26,7 @@ public:
 	 *  Sets frag count. 
 	 *  @param value Frag count to set.
 	 */
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Frags Count"), Category = "SagaGUI|Frags")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Frags Count"), Category = "SagaGUI|Frags")
 	void SetFragsCount(int32 value);
 
 private:

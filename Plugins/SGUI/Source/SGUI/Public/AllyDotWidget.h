@@ -28,7 +28,7 @@ public:
 	*  @param offset Offset to the follow target location in world space.
 	*  @return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Ally Dot", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Ally Dot",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|AllyDot")
 	static UAllyDotWidget* Create(UObject* worldContextObject, AActor* followTarget, FVector offset = FVector::ZeroVector);
 
@@ -36,7 +36,7 @@ public:
 	*  Sets red-to-green ratio for tint color of the ally dot image.
 	*  @param value Ratio. Should be in 0.0 to 1.0 range.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Ally Dot HP"), Category = "SagaGUI|AllyDot")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Ally Dot HP"), Category = "SagaGUI|AllyDot")
 	void SetHPRatio(const float& value);
 
 	/**
@@ -48,7 +48,7 @@ public:
 	FORCEINLINE void BindHPRatio(FunctorType&& functor) { onTick.BindLambda(Forward<FunctorType>(functor)); }
 
 protected:
-	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
+	virtual void NativeTick(const FGeometry& myGeometry, float deltaTime) override;
 
 private:
 	UImage* allyDotImage;

@@ -18,7 +18,7 @@ public:
 	virtual void DoClick() override;
 
 protected:
-	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
+	virtual void NativeTick(const FGeometry& myGeometry, float deltaTime) override;
 
 private:
 	class UTextBlock* cdLabel;

@@ -31,7 +31,7 @@ public:
 	 *  @param barColor Fill color of the bar.
 	 *  @return Instance of the created widget.
 	 */
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Floating Bar", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Floating Bar",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|FloatingBar")
 	static UFloatingBarWidget* Create(UObject* worldContextObject, AActor* followTarget, AActor* lookPoint = nullptr, 
 										FVector offset = FVector::ZeroVector, FLinearColor fillColor = FLinearColor::Red);
@@ -40,14 +40,14 @@ public:
 	*  Sets player name that will appear with the bar.
 	*  @param value Player name text.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Player Name"), Category = "SagaGUI|FloatingBar")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Player Name"), Category = "SagaGUI|FloatingBar")
 	void SetPlayerName(FText value);
 
 	/**
 	 *  Sets fill amount of the floating bar. 
 	 *  @param value Fill value. Should be in 0.0 to 1.0 range.
 	 */
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Floating Bar HP"), Category = "SagaGUI|FloatingBar")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Floating Bar HP"), Category = "SagaGUI|FloatingBar")
 	void SetFillAmount(const float& value);
 	
 	/**
@@ -62,11 +62,11 @@ public:
 	*  Sets fill color of the progress bar.
 	*  @param fillColor The color.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Floating Bar Color"), Category = "SagaGUI|FloatingBar")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Floating Bar Color"), Category = "SagaGUI|FloatingBar")
 	void SetFillColor(FLinearColor fillColor);
 
 protected:
-	virtual void Tick_Implementation(FGeometry myGeometry, float deltaTime) override;
+	virtual void NativeTick(const FGeometry& myGeometry, float deltaTime) override;
 
 private:
 	class UCanvasPanel* floatingPanel;

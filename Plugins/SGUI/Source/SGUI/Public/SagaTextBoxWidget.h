@@ -18,14 +18,14 @@ public:
 	*  Sets text to the text box.
 	*  @param text The text for the text box.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Set Text"), Category = "SagaGUI")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Text"), Category = "SagaGUI")
 	void SetText(FText text);
 
 	/**
 	*  Gets text from the text box.
 	*  @return The text kept by the text box.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Get Text"), Category = "SagaGUI")
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get Text"), Category = "SagaGUI")
 	FText GetText();
 
 protected:

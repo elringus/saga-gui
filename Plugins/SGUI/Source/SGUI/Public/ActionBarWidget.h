@@ -18,7 +18,7 @@ public:
 	*  @param worldContextObject Any UObject to get world context from.
 	*  @return Instance of the created widget.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Create Action Bar", 
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Create Action Bar",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionBar")
 	static UActionBarWidget* Create(UObject* worldContextObject);
 
@@ -31,7 +31,7 @@ public:
 	*  @param tooltipTxt The tooltip text to show on hover for the action button.
 	*  @return Instance of the created button.
 	*/
-	UFUNCTION(BlueprintCallable, meta = (FriendlyName = "Add Action Button",
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Add Action Button",
 		HidePin = "worldContextObject", DefaultToSelf = "worldContextObject"), Category = "SagaGUI|ActionBar")
 	UActionBarButtonWidget* AddActionButton(UObject* worldContextObject, float cooldown = 0, UTexture2D* buttonTexture = nullptr, FText tooltipTxt = FText::FromString(TEXT("")));
 
