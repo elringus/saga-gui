@@ -45,6 +45,8 @@ protected:
 		auto masterController = GetPlayerController(worldContextObject);
 		if (!masterController) { UE_LOG(SagaGUI, Error, TEXT("InstantiateWidget(): Can't get player controller. Aborting widget creation.")); return nullptr; }
 
+		if (!masterController->Player) { UE_LOG(SagaGUI, Error, TEXT("InstantiateWidget(): Can't get local player in player controller. Aborting widget creation.")); return nullptr; }
+
 		auto widget = CreateWidget<USagaWidget>(masterController, *widgetClass);
 
 		widget->AddToViewport(zOrder);
