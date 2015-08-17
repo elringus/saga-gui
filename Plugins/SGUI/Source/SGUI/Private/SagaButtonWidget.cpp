@@ -9,8 +9,22 @@ void USagaButtonWidget::InitializeButton(UButton* button)
 
 void USagaButtonWidget::DoClick()
 {
+	if (IsLocked) return;
+
 	if (OnSagaButtonClicked.IsBound())
 		OnSagaButtonClicked.Broadcast();
+}
+
+void USagaButtonWidget::Lock()
+{
+	IsLocked = true;
+	button->SetIsEnabled(false);
+}
+
+void USagaButtonWidget::Unlock()
+{
+	IsLocked = false;
+	button->SetIsEnabled(true);
 }
 
 void USagaButtonWidget::SetTexture(UTexture2D* texture)

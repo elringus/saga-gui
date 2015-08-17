@@ -29,6 +29,18 @@ public:
 	virtual void DoClick();
 
 	/**
+	*  Lockes the button, preventing it from executing DoClick command.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Lock"), Category = "SagaGUI")
+	virtual void Lock();
+
+	/**
+	*  Removes lock from the button, allowing it to recieve DoClick command.
+	*/
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Unlock"), Category = "SagaGUI")
+	virtual void Unlock();
+
+	/**
 	*  Sets texture for the button.
 	*  @param texture The texture to use.
 	*/
@@ -44,5 +56,6 @@ public:
 
 protected:
 	class UButton* button;
+	bool IsLocked = false;
 
 };

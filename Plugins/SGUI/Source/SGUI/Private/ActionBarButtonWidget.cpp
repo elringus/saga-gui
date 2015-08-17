@@ -21,12 +21,12 @@ void UActionBarButtonWidget::NativeTick(const FGeometry& myGeometry, float delta
 	cdTimer = cdTimer > 0.f ? cdTimer - deltaTime : 0.f;
 	if (cdTimer > 0) cdLabel->SetText(FText::FromString(FString::Printf(TEXT("%.1f"), cdTimer)));
 	cdLabel->SetVisibility(cdTimer == 0 ? ESlateVisibility::Hidden : ESlateVisibility::Visible);
-	button->SetIsEnabled(cdTimer == 0);
+	button->SetIsEnabled(!IsLocked && cdTimer == 0);
 }
 
 void UActionBarButtonWidget::DoClick()
 {
-	if (cdTimer > 0) return;
+	if (IsLocked || cdTimer > 0) return;
 
 	Super::DoClick();
 
